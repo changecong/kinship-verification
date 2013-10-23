@@ -3,6 +3,3 @@
 
 # ignore helper scripts
 treegen.sh
-
-# ignore some test file
-kinvrf/test/opencv-test/*
