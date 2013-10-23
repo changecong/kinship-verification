@@ -4,7 +4,7 @@
 ## Version:       v1.0.0
 ## Author:        Zhicong Chen <zhicong.chen@changecong.com>
 ## Created at:    Tue Oct 22 21:47:44 2013
-## Modified at:   Tue Oct 22 22:34:55 2013
+## Modified at:   Wed Oct 23 00:08:09 2013
 ## Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
 ## Status:        Experimental, do not distribute.
 ## Description:   This is a bash code used to automatically generate
@@ -13,7 +13,7 @@
 #####################################################################
 
 #!/bin/bash
-rm -f version.h # remove old version.h
+rm -f include/version.h # remove old version.h
 # git the git commit list, sort then write to config.git-hash
 git rev-list HEAD | sort > config.git-hash
 # use wc to count the number of lines of config.git-hash
@@ -37,6 +37,6 @@ fi
 # remove temporary file
 rm -f config.git-hash
 # generate a new version.h
-cat version.h.template | sed "s/\GIT_VERSION/$GIT_VERSION/g" |sed "s/\REVERSION/$REVERSION/g" > version.h
+cat version.h.template | sed "s/\GIT_VERSION/$GIT_VERSION/g" |sed "s/\REVERSION/$REVERSION/g" > include/version.h
 
 echo "new version.h generated"
