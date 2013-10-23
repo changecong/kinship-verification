@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Wed Oct 23 01:47:58 2013
+ * Modified at:   Wed Oct 23 14:09:58 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -40,32 +40,53 @@ class ImageReader {
     
     /// \fn
     /// \brief a copy constructor
-    explicit ImageReader(const ImageReader &other);
+    explicit ImageReader(const ImageReader& other);
+
+    /// \fn
+    /// \brief
+    explicit ImageReader(const Mat& mat);
 
     /// \fn
     /// \brief set and get image_path_
     // void image_path(string path);
-    string image_path();
+    // string image_path() const;
 
     /// \fn
-    /// \brief set and get image
-    // void image(Mat image);
-    Mat image();
+    /// \brief set and get image_mat_
+    // void image_mat(Mat image);
+    Mat image_mat() const;
 
     /// \fn
     /// \brief set and get image
     // void image_is_read(bool flag);
-    bool image_is_read();
-    
+    bool image_is_read() const;
+
+    /// \fn
+    /// \brief get image width
+    int image_width() const;
+
+    /// \fn
+    /// \brief get image height
+    int image_height() const;
 
   private:
+    // some helper functions
+
     /// \fn init()
     /// \brief
     void init();
 
-    string image_path_;  ///< the path of image
-    Mat image_;  ///< the image that image reader reads in
+    /// \fn init()
+    /// \brief
+    void init(const Mat& mat, bool flag, int width, int height);
+
+    // string image_path_;  ///< the path of image
+    Mat image_mat_;  ///< the image that image reader reads in
     bool image_is_read_;  ///< a flag that used to set if the image is read successfully
+    int image_width_;  ///< image width
+    int image_height_;  ///< image height
+
+    static const Mat default_mat_;  ///< a default image displaied when image_mat_ is not avialable
 };
 
 #endif KINVRF_IMAGE_READER_H
