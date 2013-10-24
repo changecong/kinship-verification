@@ -1,2 +1,3 @@
 # ignore some test file
 /opencv-test/
+/makefile-test/

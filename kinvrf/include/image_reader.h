@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Wed Oct 23 14:09:58 2013
+ * Modified at:   Wed Oct 23 22:51:57 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -40,7 +40,7 @@ class ImageReader {
     
     /// \fn
     /// \brief a copy constructor
-    explicit ImageReader(const ImageReader& other);
+    // explicit ImageReader(const ImageReader& other);
 
     /// \fn
     /// \brief
@@ -54,7 +54,7 @@ class ImageReader {
     /// \fn
     /// \brief set and get image_mat_
     // void image_mat(Mat image);
-    Mat image_mat() const;
+    Mat image_mat();
 
     /// \fn
     /// \brief set and get image
@@ -76,6 +76,10 @@ class ImageReader {
     /// \brief
     void init();
 
+    /// \fn
+    /// \brief
+    void init(const Mat& mat, bool flag);
+
     /// \fn init()
     /// \brief
     void init(const Mat& mat, bool flag, int width, int height);
@@ -86,7 +90,7 @@ class ImageReader {
     int image_width_;  ///< image width
     int image_height_;  ///< image height
 
-    static const Mat default_mat_;  ///< a default image displaied when image_mat_ is not avialable
+    const Mat default_mat_;  ///< a default image displaied when image_mat_ is not avialable
 };
 
-#endif KINVRF_IMAGE_READER_H
+#endif  // KINVRF_IMAGE_READER_H

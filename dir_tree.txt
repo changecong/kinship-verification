@@ -1,6 +1,11 @@
 .
 ├── dir_tree.txt
 ├── kinvrf
+│   ├── build
+│   │   └── obj
+│   │       ├── image_reader.o
+│   │       ├── image-reader-test.o
+│   │       └── test
 │   ├── contrib
 │   ├── doc
 │   ├── include
@@ -18,9 +23,18 @@
 │   │       ├── tinyxml2.h
 │   │       └── xmltest.cpp
 │   ├── test
+│   │   ├── image-reader-test
+│   │   │   └── image-reader-test.cpp
+│   │   ├── lena.jpg
+│   │   ├── makefile-test
+│   │   │   └── Makefile
+│   │   └── opencv-test
+│   │       ├── compile.txt
+│   │       ├── mat-test
+│   │       └── mat-test.cpp
 │   ├── version.h.template
 │   └── version.sh
 ├── README.md
 └── treegen.sh
 
-10 directories, 13 files
+15 directories, 22 files
