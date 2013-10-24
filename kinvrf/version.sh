@@ -4,7 +4,7 @@
 ## Version:       v1.0.0
 ## Author:        Zhicong Chen <zhicong.chen@changecong.com>
 ## Created at:    Tue Oct 22 21:47:44 2013
-## Modified at:   Wed Oct 23 00:08:09 2013
+## Modified at:   Wed Oct 23 23:38:41 2013
 ## Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
 ## Status:        Experimental, do not distribute.
 ## Description:   This is a bash code used to automatically generate
@@ -37,6 +37,6 @@ fi
 # remove temporary file
 rm -f config.git-hash
 # generate a new version.h
-cat version.h.template | sed "s/\GIT_VERSION/$GIT_VERSION/g" |sed "s/\REVERSION/$REVERSION/g" > include/version.h
+cat version.h.template | sed "s/\MGIT_VERSION/$GIT_VERSION/g" |sed "s/\MREVERSION/$REVERSION/g" > include/version.h
 
 echo "new version.h generated"

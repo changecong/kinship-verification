@@ -4,10 +4,10 @@
 │   ├── build
 │   │   └── obj
 │   │       ├── image_reader.o
-│   │       ├── image-reader-test.o
-│   │       └── test
+│   │       └── image-reader-test.o
 │   ├── contrib
 │   ├── doc
+│   │   └── HowToCompile
 │   ├── include
 │   │   ├── image_reader.h
 │   │   └── version.h
@@ -24,7 +24,8 @@
 │   │       └── xmltest.cpp
 │   ├── test
 │   │   ├── image-reader-test
-│   │   │   └── image-reader-test.cpp
+│   │   │   ├── image-reader-test.cpp
+│   │   │   └── test
 │   │   ├── lena.jpg
 │   │   ├── makefile-test
 │   │   │   └── Makefile
@@ -37,4 +38,4 @@
 ├── README.md
 └── treegen.sh
 
-15 directories, 22 files
+15 directories, 23 files

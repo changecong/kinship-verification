@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Wed Oct 23 16:04:29 2013
- * Modified at:   Wed Oct 23 23:09:26 2013
+ * Modified at:   Wed Oct 23 23:29:01 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This file is used to test the functionality of class
@@ -16,6 +16,7 @@
 #include "include/image_reader.h"
 // system includes
 #include <string>
+#include <stdio.h>
 
 using namespace std;
 
@@ -32,6 +33,8 @@ int main() {
     Mat mat_file = ir_file->image_mat();
     // generate a new ImageReader by a mat
     ImageReader* ir_mat = new ImageReader(mat_file);
+
+    printf("width: %d, height: %d", ir_mat->image_width(), ir_mat->image_height());
 
     return 0;
 }
