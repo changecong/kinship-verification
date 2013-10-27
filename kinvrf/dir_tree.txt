@@ -1,0 +1,42 @@
+.
+├── build
+│   ├── Makefile
+│   └── obj
+│       ├── image_reader.o
+│       └── image-reader-test.o
+├── contrib
+├── dir_tree.txt
+├── doc
+│   └── HowToCompile
+├── include
+│   ├── image_reader.h
+│   └── version.h
+├── lib
+├── Makefile
+├── res
+├── src
+│   ├── imagerelated
+│   │   └── image_reader.cpp
+│   └── xml
+│       ├── Makefile
+│       ├── test.xml
+│       ├── tinyxml2.cpp
+│       ├── tinyxml2.h
+│       └── xmltest.cpp
+├── test
+│   ├── image-reader-test
+│   │   ├── image-reader-test.cpp
+│   │   ├── Makefile
+│   │   └── test
+│   ├── lena.jpg
+│   ├── Makefile
+│   ├── makefile-test
+│   │   └── Makefile
+│   └── opencv-test
+│       ├── compile.txt
+│       ├── mat-test
+│       └── mat-test.cpp
+├── version.h.template
+└── version.sh
+
+14 directories, 25 files

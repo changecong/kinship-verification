@@ -1,0 +1,13 @@
+CC=g++
+CFLAGES=-ggdb -Wall -c
+LFLAGES=
+OPENCVCFLAGES = `pkg-config --cflags opencv `
+OPENCVLFLAGES = `pkg-config --libs opencv `
+SOURCES=$(wildcard *.cpp)
+OBJECTS=$(SOURCES:.CPP=.o)
+EXECUTABLE=
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $()
