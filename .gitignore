@@ -13,8 +13,7 @@ treegen.sh
 *.o
 
 # ignore all executable test file
-*-test
-*_test
+kinvrf/build/bin/
 
 # ignore all .bmp file
 *.bmp
