@@ -14,6 +14,7 @@ treegen.sh
 
 # ignore all executable test file
 *-test
+*_test
 
 # ignore all .bmp file
 *.bmp
