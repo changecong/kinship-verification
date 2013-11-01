@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Wed Oct 23 22:51:57 2013
+ * Modified at:   Tue Oct 29 17:26:34 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -24,6 +24,8 @@
 // namespaces
 using namespace cv;
 using namespace std;
+
+namespace kinvrf_img {
 
 /// \class ImageReader
 /// \brief
@@ -92,5 +94,7 @@ class ImageReader {
 
     const Mat default_mat_;  ///< a default image displaied when image_mat_ is not avialable
 };
+
+}  // namespace kinvrf_img
 
 #endif  // KINVRF_IMAGE_READER_H

@@ -2,40 +2,68 @@
 ├── dir_tree.txt
 ├── kinvrf
 │   ├── build
+│   │   ├── bin
+│   │   │   └── xml_test
+│   │   ├── lib
+│   │   ├── Makefile
 │   │   └── obj
 │   │       ├── image_reader.o
-│   │       └── image-reader-test.o
+│   │       ├── image-reader-test.o
+│   │       ├── tinyxml2.o
+│   │       ├── xml_resource.o
+│   │       └── xml_test.o
 │   ├── contrib
 │   ├── doc
 │   │   └── HowToCompile
 │   ├── include
 │   │   ├── image_reader.h
-│   │   └── version.h
+│   │   ├── ml_knn.cpp
+│   │   ├── string_convert_inl.h
+│   │   ├── tinyxml2.cpp
+│   │   ├── tinyxml2.h
+│   │   ├── training_data.h
+│   │   ├── version.h
+│   │   └── xml_resource.h
 │   ├── lib
+│   ├── Makefile
 │   ├── res
+│   │   ├── data
+│   │   ├── img
+│   │   │   ├── KinFace_V2
+│   │   │   │   ├── 01_part
+│   │   │   │   ├── 02_part
+│   │   │   │   └── 03_part
+│   │   │   └── lena.jpg
+│   │   └── xml
+│   │       └── string.xml
 │   ├── src
-│   │   ├── imagerelated
+│   │   ├── img
 │   │   │   └── image_reader.cpp
+│   │   ├── ml
+│   │   │   └── ml_knn.cpp
+│   │   ├── training
 │   │   └── xml
 │   │       ├── Makefile
 │   │       ├── test.xml
-│   │       ├── tinyxml2.cpp
-│   │       ├── tinyxml2.h
+│   │       ├── xml_resource.cpp
 │   │       └── xmltest.cpp
 │   ├── test
 │   │   ├── image-reader-test
 │   │   │   ├── image-reader-test.cpp
+│   │   │   ├── Makefile
 │   │   │   └── test
-│   │   ├── lena.jpg
+│   │   ├── Makefile
 │   │   ├── makefile-test
 │   │   │   └── Makefile
-│   │   └── opencv-test
-│   │       ├── compile.txt
-│   │       ├── mat-test
-│   │       └── mat-test.cpp
+│   │   ├── opencv-test
+│   │   │   ├── compile.txt
+│   │   │   ├── mat-test
+│   │   │   └── mat-test.cpp
+│   │   └── xml-test
+│   │       └── xml_test.cpp
 │   ├── version.h.template
 │   └── version.sh
 ├── README.md
 └── treegen.sh
 
-15 directories, 23 files
+27 directories, 39 files

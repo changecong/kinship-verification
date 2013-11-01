@@ -1,5 +1,19 @@
 # ignore ~ files
 *.*~
+*~
+
+# ignore template
+*.template
+
 
 # ignore helper scripts
 treegen.sh
+
+# ignore obj file
+*.o
+
+# ignore all executable test file
+*-test
+
+# ignore all .bmp file
+*.bmp

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<storage>
+  <!-- strings -->
+  <string name="hello">hello</string>
+  <string name="world">world</string>
+
+  <!-- numbers -->
+  <number name="zeropointone">0.1</number>
+  <number name="onepointzero">1.0</number>
+
+</storage>
+
