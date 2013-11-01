@@ -2,13 +2,9 @@
 ├── dir_tree.txt
 ├── kinvrf
 │   ├── build
-│   │   ├── bin
-│   │   │   └── xml_test
 │   │   ├── lib
 │   │   ├── Makefile
 │   │   └── obj
-│   │       ├── image_reader.o
-│   │       ├── image-reader-test.o
 │   │       ├── tinyxml2.o
 │   │       ├── xml_resource.o
 │   │       └── xml_test.o
@@ -34,6 +30,8 @@
 │   │   │   │   ├── 02_part
 │   │   │   │   └── 03_part
 │   │   │   └── lena.jpg
+│   │   ├── template
+│   │   │   └── version.h.template
 │   │   └── xml
 │   │       └── string.xml
 │   ├── src
@@ -53,17 +51,14 @@
 │   │   │   ├── Makefile
 │   │   │   └── test
 │   │   ├── Makefile
-│   │   ├── makefile-test
-│   │   │   └── Makefile
 │   │   ├── opencv-test
 │   │   │   ├── compile.txt
 │   │   │   ├── mat-test
 │   │   │   └── mat-test.cpp
 │   │   └── xml-test
 │   │       └── xml_test.cpp
-│   ├── version.h.template
 │   └── version.sh
 ├── README.md
 └── treegen.sh
 
-27 directories, 39 files
+26 directories, 35 files
