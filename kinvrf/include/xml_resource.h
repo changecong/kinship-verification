@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Thu Oct 31 12:08:58 2013
- * Modified at:   Fri Nov  1 00:31:14 2013
+ * Modified at:   Sun Nov  3 01:31:06 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -17,6 +17,7 @@
 // system include
 #include <string>
 #include <map>
+#include <utility>      // std::pair
 // local
 #include "tinyxml2.h"
 
@@ -25,10 +26,6 @@ using namespace std;
 using namespace tinyxml2;
 
 namespace kinvrf_xml {
-
-    class XMLRes;
-
-    XMLRes* XML_res();
 
     ///\class XMLRes
     ///\brief a class that used to get string from xml files. so that do not need to
@@ -50,8 +47,13 @@ namespace kinvrf_xml {
         ///\brief
         string get_string(string name);
 
-        ///\fn get_int()
+        ///\fn get_number()
         double get_number(string name);
+
+        ///\fn get_settings()
+        ///\brief all settings must be set as integars.
+        ///       settings will be get dynamically
+        pair<string, string> get_setting(string name);
 
       private:
         
@@ -66,6 +68,10 @@ namespace kinvrf_xml {
         ///\fn
         ///\brief
         void fill_number_map();
+
+        ///\fn
+        ///\brief
+        pair<string, string> find_setting(string name);
 
 
         XMLDocument doc_;

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<settings>
+  
+  <!-- settings of data resource
+       0: from image of kinship_v2 database
+       1: from text of kinship_v2 database
+       2: from external images
+       3: from external text -->
+  <setting type="number" name="DataResource">0</setting>
+
+  <!-- setting of image number if use images as resource,
+       I suggest no more than 200 -->
+  <setting type="number" name="ImageDataNumber">200</setting>
+
+  <!-- setting of image data path corresponding to DATARes -->
+  <setting type="string" name="ImageDataPath"></setting>  
+
+  <!-- setting of the image anem and type -->
+  <setting type="string" name="ImageNamePreffix"></setting>
+  <setting type="string" name="ImageNameSuffix"></setting>
+  <setting type="string" name="ImageTypeSuffix">bmp</setting>
+  
+
+</settings>

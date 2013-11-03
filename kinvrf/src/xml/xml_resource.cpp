@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Thu Oct 31 12:09:05 2013
- * Modified at:   Fri Nov  1 12:34:37 2013
+ * Modified at:   Sun Nov  3 01:29:41 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -15,15 +15,12 @@
 #include "include/xml_resource.h"
 // system
 //
-#include "include/string_convert_inl.h"
+#include "include/string_convert.h"  // constant string and converter
 
 namespace kinvrf_xml {
 
-    const string KINVRF_XML_RESOURCE_FILE = "../../res/xml/string.xml";
-    const string KINVRF_XML_RESOURCE_STORAGE = "storage";
-    const string KINVRF_XML_RESOURCE_STRING = "string";
-    const string KINVRF_XML_RESOURCE_NUMBER = "number";
-    const string KINVRF_XML_RESOURCE_NAME = "name";
+    const string KINVRF_XML_RESOURCE_STRING_XML = "../../res/xml/string.xml";
+    const string KINVRF_XML_RESOURCE_SETTINGS_XML = "../../res/xml/settings.xml";
 
     XMLRes* XML_res() {
         return new XMLRes();
@@ -72,12 +69,17 @@ namespace kinvrf_xml {
 
     }
 
+    //
+    pair<string, string> XMLRes::get_setting(string name) {
+        return find_setting(name);
+    }
+
     // private
     void XMLRes::init() {
 
         // load xml file
         bool load_ok = doc_.LoadFile(kinvrf_scvt::string_to_char(
-                                         KINVRF_XML_RESOURCE_FILE));
+                                         KINVRF_XML_RESOURCE_STRING_XML));
         
         if(!load_ok) {
             // if load file error
@@ -176,6 +178,60 @@ namespace kinvrf_xml {
                         KINVRF_XML_RESOURCE_NUMBER));
             }    
         }
+    }
+
+    //
+    pair<string, string> XMLRes::find_setting(string name) {
+
+        XMLDocument settings_doc;
+
+        // load xml file
+        bool load_ok = settings_doc.LoadFile(kinvrf_scvt::string_to_char(
+                                                 KINVRF_XML_RESOURCE_SETTINGS_XML));
+        
+        if(!load_ok) {
+            // if load file error
+            // do something
+        }
+
+        XMLElement *settings_node = settings_doc.FirstChildElement(
+            kinvrf_scvt::string_to_char(
+                KINVRF_XML_RESOURCE_SETTINGS));   
+
+        XMLElement *setting_node = settings_node->FirstChildElement(
+            kinvrf_scvt::string_to_char(
+                KINVRF_XML_RESOURCE_SETTING));
+
+        while(setting_node != NULL) {
+                
+
+            
+            // get strings
+            string name_attribute_string = setting_node->Attribute(
+                kinvrf_scvt::string_to_char(
+                    KINVRF_XML_RESOURCE_NAME));
+
+            if(name == name_attribute_string) {
+                break;
+            }
+                
+            setting_node = setting_node->NextSiblingElement(
+                kinvrf_scvt::string_to_char(
+                    KINVRF_XML_RESOURCE_SETTING));
+        }
+
+        string setting_tag_value = setting_node->GetText();
+
+        // get setting type string or number
+        string type_attribute_string = setting_node->Attribure(
+            kinvrf_scvt::string_to_char(
+                KINVRF_XML_RESOURCE_TYPE));
+
+        pair<string, string> type_value_pair (type_arrtibute_string,
+                                              setting_tag_value);
+
+        return type_value_pair;
+
     }
 
     map<string, string> XMLRes::string_map_;

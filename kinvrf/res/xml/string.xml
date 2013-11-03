@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <storage>
-  <!-- strings -->
+  <!-- kinship v2 data base face images path -->
+  <string name="KinshipV2FaceChildPath">hello</string>
+  <string name="KinshipV2FaceYoungParentPath">world</string>
+  <string name="KinshipV2FaceOldParentPath">world</string>
   <string name="hello">hello</string>
-  <string name="world">world</string>
 
   <!-- numbers -->
   <number name="zeropointone">0.1</number>

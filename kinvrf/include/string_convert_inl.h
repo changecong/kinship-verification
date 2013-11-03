@@ -4,10 +4,12 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 10:54:37 2013
- * Modified at:   Fri Nov  1 11:13:44 2013
+ * Modified at:   Sun Nov  3 00:08:47 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
- * Description:   
+ * Description:   use some new C++ 11 feature
+ *                stoi, stol, stoll convert to integral types,
+ *                stof, stod, stold to floating-point values.
  *
  */
 
@@ -17,11 +19,15 @@
 #include <sstream>
 #include <string>
 
+using namespace std;
+
 namespace kinvrf_scvt {
 
+    // string to number
+/*
     ///\fn string_to_double()
-    ///\brief convert from string to double
-    inline double string_to_double(const std::string& s)
+    ///\brief convert from string to double, it is the standard way in C++ 98
+    inline double string_to_double(const string& s)
     {
         std::istringstream i(s);
         double x;
@@ -29,11 +35,34 @@ namespace kinvrf_scvt {
             return 0;
         return x;
     } 
+*/
+    
+    ///\fn string_to_double()
+    ///\brief
+    inline double string_to_double(const string& s) {
+        return stod(s);
+    }
+
+    inline double string_to_int(const string& s) {
+        return stoi(s);
+    }
+
 
     ///\fn string_to_char
     ///\brief convert frome string to char*
     inline const char* string_to_char(const string str) {
         return str.c_str();
+    }
+
+    // number to string
+    
+    ///\fn
+    ///\brief this function use C++ 11 fucntions
+    inline template <typename TNumber> string number_to_string(
+        TNumber number) {
+        
+        // call std::to_string
+        return to_string(number);  
     }
 
 }  // namespcae kinvrf_scvt
