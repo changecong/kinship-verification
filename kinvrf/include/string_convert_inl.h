@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 10:54:37 2013
- * Modified at:   Sun Nov  3 00:08:47 2013
+ * Modified at:   Wed Nov  6 19:47:16 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   use some new C++ 11 feature
@@ -24,18 +24,17 @@ using namespace std;
 namespace kinvrf_scvt {
 
     // string to number
-/*
-    ///\fn string_to_double()
-    ///\brief convert from string to double, it is the standard way in C++ 98
-    inline double string_to_double(const string& s)
-    {
-        std::istringstream i(s);
-        double x;
-        if (!(i >> x))
-            return 0;
-        return x;
-    } 
-*/
+
+    /* ///\fn string_to_double() */
+    /* ///\brief convert from string to double, it is the standard way in C++ 98 */
+    /* inline double string_to_double(const string& s) */
+    /* { */
+    /*     std::istringstream i(s); */
+    /*     double x; */
+    /*     if (!(i >> x)) */
+    /*         return 0; */
+    /*     return x; */
+    /* }  */
     
     ///\fn string_to_double()
     ///\brief
@@ -43,10 +42,13 @@ namespace kinvrf_scvt {
         return stod(s);
     }
 
-    inline double string_to_int(const string& s) {
+    /* inline int string_to_int(const string& s) { */
+    /*     return (int)string_to_double(s); */
+    /* } */
+
+    inline int string_to_int(const string& s) {
         return stoi(s);
     }
-
 
     ///\fn string_to_char
     ///\brief convert frome string to char*
@@ -58,8 +60,9 @@ namespace kinvrf_scvt {
     
     ///\fn
     ///\brief this function use C++ 11 fucntions
-    inline template <typename TNumber> string number_to_string(
-        TNumber number) {
+    template <typename T> 
+        inline string number_to_string(
+        T number) {
         
         // call std::to_string
         return to_string(number);  

@@ -10,15 +10,15 @@
 
   <!-- setting of image number if use images as resource,
        I suggest no more than 200 -->
-  <setting type="number" name="ImageDataNumber">200</setting>
+  <setting type="number" name="ImageDataNumber">2</setting>
 
   <!-- setting of image data path corresponding to DATARes -->
-  <setting type="string" name="ImageDataPath"></setting>  
+  <setting type="string" name="ImageDataPath">../../res/img/</setting>  
 
   <!-- setting of the image anem and type -->
-  <setting type="string" name="ImageNamePreffix"></setting>
+  <setting type="string" name="ImageNamePrefix">lena</setting>
   <setting type="string" name="ImageNameSuffix"></setting>
-  <setting type="string" name="ImageTypeSuffix">bmp</setting>
+  <setting type="string" name="ImageTypeSuffix">.jpg</setting>
   
 
 </settings>

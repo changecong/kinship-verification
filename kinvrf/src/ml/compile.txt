@@ -1,0 +1,1 @@
+g++ -ggdb -std=c++11 -I/usr/local/include/opencv -I/usr/local/include   -I../../ -c ml_data.cpp -o ../../build/obj/ml_data.o

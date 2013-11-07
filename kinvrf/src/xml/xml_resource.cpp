@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Thu Oct 31 12:09:05 2013
- * Modified at:   Sun Nov  3 01:29:41 2013
+ * Modified at:   Wed Nov  6 20:36:34 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -220,14 +220,22 @@ namespace kinvrf_xml {
                     KINVRF_XML_RESOURCE_SETTING));
         }
 
-        string setting_tag_value = setting_node->GetText();
+        string setting_tag_value = "";
+
+        if (NULL != setting_node->GetText()) {
+
+            setting_tag_value = setting_node->GetText();
+
+        } else {
+            setting_tag_value = "";
+        }
 
         // get setting type string or number
-        string type_attribute_string = setting_node->Attribure(
+        string type_attribute_string = setting_node->Attribute(
             kinvrf_scvt::string_to_char(
                 KINVRF_XML_RESOURCE_TYPE));
 
-        pair<string, string> type_value_pair (type_arrtibute_string,
+        pair<string, string> type_value_pair (type_attribute_string,
                                               setting_tag_value);
 
         return type_value_pair;

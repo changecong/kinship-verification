@@ -2,9 +2,15 @@
 ├── dir_tree.txt
 ├── kinvrf
 │   ├── build
+│   │   ├── bin
+│   │   │   └── xml_test
 │   │   ├── lib
 │   │   ├── Makefile
 │   │   └── obj
+│   │       ├── darray-test.o
+│   │       ├── date-test.o
+│   │       ├── image_reader.o
+│   │       ├── ml_data.o
 │   │       ├── tinyxml2.o
 │   │       ├── xml_resource.o
 │   │       └── xml_test.o
@@ -12,12 +18,19 @@
 │   ├── doc
 │   │   └── HowToCompile
 │   ├── include
+│   │   ├── data_resource.h
+│   │   ├── define_strings.h
 │   │   ├── image_reader.h
+│   │   ├── ml_data.h
 │   │   ├── ml_knn.cpp
+│   │   ├── string_convert.h
 │   │   ├── string_convert_inl.h
 │   │   ├── tinyxml2.cpp
 │   │   ├── tinyxml2.h
-│   │   ├── training_data.h
+│   │   ├── types.h
+│   │   ├── util_data_inl.h
+│   │   ├── util_get_resource.h
+│   │   ├── util_get_resource_inl.h
 │   │   ├── version.h
 │   │   └── xml_resource.h
 │   ├── lib
@@ -29,15 +42,20 @@
 │   │   │   │   ├── 01_part
 │   │   │   │   ├── 02_part
 │   │   │   │   └── 03_part
+│   │   │   ├── lena0.jpg
+│   │   │   ├── lena1.jpg
 │   │   │   └── lena.jpg
 │   │   ├── template
 │   │   │   └── version.h.template
 │   │   └── xml
+│   │       ├── settings.xml
 │   │       └── string.xml
 │   ├── src
 │   │   ├── img
 │   │   │   └── image_reader.cpp
 │   │   ├── ml
+│   │   │   ├── compile.txt
+│   │   │   ├── ml_data.cpp
 │   │   │   └── ml_knn.cpp
 │   │   ├── training
 │   │   └── xml
@@ -45,20 +63,26 @@
 │   │       ├── test.xml
 │   │       ├── xml_resource.cpp
 │   │       └── xmltest.cpp
-│   ├── test
-│   │   ├── image-reader-test
-│   │   │   ├── image-reader-test.cpp
-│   │   │   ├── Makefile
-│   │   │   └── test
-│   │   ├── Makefile
-│   │   ├── opencv-test
-│   │   │   ├── compile.txt
-│   │   │   ├── mat-test
-│   │   │   └── mat-test.cpp
-│   │   └── xml-test
-│   │       └── xml_test.cpp
-│   └── version.sh
+│   └── test
+│       ├── darray-test
+│       │   ├── darray-test
+│       │   └── darray-test.cpp
+│       ├── data-test
+│       │   ├── compile.txt
+│       │   ├── data-test
+│       │   └── data-test.cpp
+│       ├── image-reader-test
+│       │   ├── image-reader-test.cpp
+│       │   ├── Makefile
+│       │   └── test
+│       ├── Makefile
+│       ├── opencv-test
+│       │   ├── compile.txt
+│       │   ├── mat-test
+│       │   └── mat-test.cpp
+│       └── xml-test
+│           └── xml_test.cpp
 ├── README.md
 └── treegen.sh
 
-26 directories, 35 files
+29 directories, 56 files

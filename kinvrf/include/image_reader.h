@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Tue Oct 29 17:26:34 2013
+ * Modified at:   Wed Nov  6 15:43:16 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -20,6 +20,7 @@
 // external includes
 #include <opencv2/opencv.hpp>
 // internal includes
+#include "types.h"
 
 // namespaces
 using namespace cv;
@@ -59,17 +60,25 @@ class ImageReader {
     Mat image_mat();
 
     /// \fn
+    /// \brief
+    uchar* image_data();
+
+    /// \fn
     /// \brief set and get image
     // void image_is_read(bool flag);
     bool image_is_read() const;
 
     /// \fn
     /// \brief get image width
-    int image_width() const;
+    size_t image_width() const;
 
     /// \fn
     /// \brief get image height
-    int image_height() const;
+    size_t image_height() const;
+
+    /// \fn
+    /// \brief
+    size_t image_size() const;
 
   private:
     // some helper functions
@@ -84,13 +93,14 @@ class ImageReader {
 
     /// \fn init()
     /// \brief
-    void init(const Mat& mat, bool flag, int width, int height);
+    void init(const Mat& mat, bool flag, size_t width, size_t height);
 
     // string image_path_;  ///< the path of image
     Mat image_mat_;  ///< the image that image reader reads in
     bool image_is_read_;  ///< a flag that used to set if the image is read successfully
-    int image_width_;  ///< image width
-    int image_height_;  ///< image height
+    size_t image_width_;  ///< image width
+    size_t image_height_;  ///< image height
+    size_t image_size_;  ///< image width x heidht; 
 
     const Mat default_mat_;  ///< a default image displaied when image_mat_ is not avialable
 };
