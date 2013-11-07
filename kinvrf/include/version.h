@@ -1,7 +1,7 @@
 /*
  * Filename:      version.h.template
  * Copyright:     2013, Zhicong Chen
- * Version:       0.2.24_4ba032b
+ * Version:       0.2.32_8244c7f
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 21:36:23 2013
  * Modified at:   Tue Oct 22 22:15:07 2013
@@ -17,7 +17,7 @@
 
 #define MAJOR_VERSION_NUMBER 0
 #define MINOR_VERSION_NUMBER 2
-#define REVERSION_NUMBER 24
-#define GIT_VERSION_NUMBER 4ba032b
+#define REVERSION_NUMBER 32
+#define GIT_VERSION_NUMBER 8244c7f
 
 #endif KINVRF_VERSION_H
