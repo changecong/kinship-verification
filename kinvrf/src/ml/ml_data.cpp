@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 13:27:28 2013
- * Modified at:   Wed Nov  6 22:46:28 2013
+ * Modified at:   Fri Nov  8 13:14:46 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -26,6 +26,48 @@ using namespace kinvrf_img;
 using namespace std;
 
 namespace kinvrf_ml { 
+
+    // Data
+
+    Mat Data::data_mat() {
+        return data_mat_;
+    }
+
+    // TestData is a class that used to contain test data
+    
+    //
+    TestData::TestData(){}
+
+    //
+    TestData::TestData(const string& path_one,
+                       const string& path_two) :
+        image_one_(path_one),
+        image_two_(path_two) {
+    }
+
+    //
+    void TestData::get_data() {
+        if(image_one_.empty() || image_two_.empty) {
+            // TODO
+        }
+
+        // get two images
+        ImageReader* image_reader_one = new ImageReader(image_one_);
+        ImageReader* image_reader_two = new ImageReader(image_two_);
+
+        // do some math
+        if((image_reader_one.image_width() != image_reader_two.image_width()) ||
+           (image_reader_one.image_height() != image_reader_two.image_height())) {
+            // TODO            
+        }
+
+        Mat diff_one_two = image_reader_one.image_mat() - image_reader_two.image_mat();
+        MAt diff_two_one = image_reader_two.image_mat() - image_reader_two.image_mat();
+        
+    }
+    
+
+    // DataRes is a class that used to get training data.
 
     // default constructor reads data by settings
     DataRes::DataRes() : 
