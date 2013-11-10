@@ -3,7 +3,6 @@
 ├── kinvrf
 │   ├── build
 │   │   ├── bin
-│   │   │   └── xml_test
 │   │   ├── lib
 │   │   ├── Makefile
 │   │   └── obj
@@ -16,6 +15,10 @@
 │   │       └── xml_test.o
 │   ├── contrib
 │   ├── doc
+│   │   ├── change_log.txt
+│   │   ├── gen
+│   │   │   ├── change_log
+│   │   │   └── change_log.cpp
 │   │   └── HowToCompile
 │   ├── include
 │   │   ├── data_resource.h
@@ -23,6 +26,7 @@
 │   │   ├── image_reader.h
 │   │   ├── ml_data.h
 │   │   ├── ml_knn.cpp
+│   │   ├── ml_test_data.h
 │   │   ├── string_convert.h
 │   │   ├── string_convert_inl.h
 │   │   ├── tinyxml2.cpp
@@ -63,26 +67,27 @@
 │   │       ├── test.xml
 │   │       ├── xml_resource.cpp
 │   │       └── xmltest.cpp
-│   └── test
-│       ├── darray-test
-│       │   ├── darray-test
-│       │   └── darray-test.cpp
-│       ├── data-test
-│       │   ├── compile.txt
-│       │   ├── data-test
-│       │   └── data-test.cpp
-│       ├── image-reader-test
-│       │   ├── image-reader-test.cpp
-│       │   ├── Makefile
-│       │   └── test
-│       ├── Makefile
-│       ├── opencv-test
-│       │   ├── compile.txt
-│       │   ├── mat-test
-│       │   └── mat-test.cpp
-│       └── xml-test
-│           └── xml_test.cpp
+│   ├── test
+│   │   ├── darray-test
+│   │   │   ├── darray-test
+│   │   │   └── darray-test.cpp
+│   │   ├── data-test
+│   │   │   ├── compile.txt
+│   │   │   ├── data-test
+│   │   │   └── data-test.cpp
+│   │   ├── image-reader-test
+│   │   │   ├── image-reader-test.cpp
+│   │   │   ├── Makefile
+│   │   │   └── test
+│   │   ├── Makefile
+│   │   ├── opencv-test
+│   │   │   ├── compile.txt
+│   │   │   ├── mat-test
+│   │   │   └── mat-test.cpp
+│   │   └── xml-test
+│   │       └── xml_test.cpp
+│   └── version.sh
 ├── README.md
 └── treegen.sh
 
-29 directories, 56 files
+30 directories, 60 files
