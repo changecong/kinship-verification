@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 13:27:28 2013
- * Modified at:   Fri Nov  8 13:14:46 2013
+ * Modified at:   Sat Nov  9 22:32:54 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -61,6 +61,7 @@ namespace kinvrf_ml {
             // TODO            
         }
 
+        // diff of two mat
         Mat diff_one_two = image_reader_one.image_mat() - image_reader_two.image_mat();
         MAt diff_two_one = image_reader_two.image_mat() - image_reader_two.image_mat();
         

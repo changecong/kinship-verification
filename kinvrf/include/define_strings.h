@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 14:40:58 2013
- * Modified at:   Wed Nov  6 14:29:42 2013
+ * Modified at:   Sun Nov 10 21:47:46 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -66,5 +66,10 @@ const string KINVRF_XML_RESOURCE_SETTING_IMAGEDATAPATH = "ImageDataPath";
 const string KINVRF_XML_RESOURCE_SETTING_IMAGENAMEPREFIX = "ImageNamePrefix";
 const string KINVRF_XML_RESOURCE_SETTING_IMAGENAMESUFFIX = "ImageNameSuffix";
 const string KINVRF_XML_RESOURCE_SETTING_IMAGETYPESUFFIX = "ImageTypeSuffix";
+
+const string KINVRF_XML_RESOURCE_SETTING_IMAGESCALE = "ImageScale";
+const string KINVRF_XML_RESOURCE_SETTING_FACECASCADECLASSIFIERPATH = "FaceCascadeClassifierPath";
+const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERPATH = "EyesCascadeClassifierPath";
+const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERBACKUPPATH = "EyesCascadeClassifierBackUpPath";
 
 #endif  // KINVRF_DEFINE_STRING_H
