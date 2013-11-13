@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Sun Nov 10 11:27:32 2013
- * Modified at:   Sun Nov 10 22:19:39 2013
+ * Modified at:   Tue Nov 12 20:02:51 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a face detector class, use opencv APIs
@@ -48,7 +48,15 @@ namespace kinvrf_img {
 
         ///\fn
         ///\brief
-        void eyes();
+        vector<Mat> corrected_faces();
+
+        ///\fn
+        ///\brief used to manually set the 
+        void external_path(const string& path);
+
+        ///\fn
+        ///\brief
+        int face_number();
 
       private:
 
@@ -119,6 +127,7 @@ namespace kinvrf_img {
         vector<Rect> eye_faces_;
 
         vector<Mat> faces_mat_;
+        vector<Mat> corrected_faces_;
 
         double scale_;  // the scale used to resize the image, default is 1.3
 
@@ -127,6 +136,8 @@ namespace kinvrf_img {
 
         string face_cascade_classifier_path_;  // face classifier
         string eyes_cascade_classifier_path_;  // eyes classifier 
+
+        string external_path_;  // path that set from server
 
         int face_number_;
 

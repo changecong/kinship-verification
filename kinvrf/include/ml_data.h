@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Wed Nov  6 10:42:43 2013
- * Modified at:   Fri Nov  8 12:52:46 2013
+ * Modified at:   Tue Nov 12 00:02:47 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -16,7 +16,7 @@
 
 #include "util_data_inl.h"
 #include "data_resource.h"
-#include <opencv2/opencv.h>  // Mat
+#include <opencv2/opencv.hpp>  // Mat
 
 using namespace cv;
 

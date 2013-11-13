@@ -1,0 +1,32 @@
+$def with (image_url, enable)
+
+
+<div class="container">
+  <div class="page-header">
+    <h1>Image Update</h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+
+      <h3>Show Image</h3>
+      <div class="thumbnail">
+	<img src="$image_url"/>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <h3>Upload</h3>
+
+      <form method="POST" enctype="multipart/form-data" action="">
+	<div class="alert alert-success">Only .jpg .bmp .png allowed</div>
+	<input type="file" name="myfile" />
+	<br/>
+	<button type="submit" class="btn btn-primary" $enable[0]>
+	  <span class="glyphicon glyphicon-cloud-upload"></span>  Upload
+	</button>
+      </form>    
+      <br/>
+      <a class="btn btn-danger $enable[1]" href="/faceconfirm">
+	<span class="glyphicon glyphicon-circle-arrow-right"></span>  Continue</a>
+    </div>
+  </div>
+</div>

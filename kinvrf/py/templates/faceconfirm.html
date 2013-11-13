@@ -1,0 +1,155 @@
+$def with (image_url, persons)
+
+<script type="text/javascript">
+  jQuery(function($$){
+
+    var jcrop_api,
+        boundx,
+        boundy,
+        imagex,
+        imagey,
+        scale,
+
+        $$preview = $$('#preview-pane'),
+        $$pcnt = $$('#preview-pane .preview-container'),
+        $$pimg = $$('#preview-pane .preview-container img'),
+
+        xsize = $$pcnt.width(),
+        ysize = $$pcnt.height();
+    
+    $$('#target').Jcrop({
+      onChange: updatePreview,
+      onSelect: updateCoords,
+      aspectRatio: xsize / ysize
+    },function(){
+      
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+      var image = new Image();
+      image.src = "$image_url";
+      imagex = image.width;
+      imagey = image.height;
+      scale = imagex/boundx;
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+
+      // Move the preview into the jcrop container for css positioning
+      // $$preview.appendTo(jcrop_api.ui.holder);
+    });
+
+    function updatePreview(c)
+    {
+      if (parseInt(c.w) > 0)
+      {
+        var rx = xsize / c.w;
+        var ry = ysize / c.h;
+
+        $$pimg.css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });
+      }
+    };
+
+    function updateCoords(c)
+    {
+      $$('#x').val(Math.round(c.x*scale));
+      $$('#y').val(Math.round(c.y*scale));
+      $$('#w').val(Math.round(c.w*scale));
+      $$('#h').val(Math.round(c.h*scale));
+    };
+
+  });
+
+
+</script>
+
+<style>
+#preview-pane .preview-container {
+  width: 100px;
+  height: 127px;
+  overflow: hidden;
+}
+
+</style>
+<div class="container">
+  <div class="page-header">
+    <h1>Confirm Faces</h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+
+      <div class="row">
+	<h3>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Show Image
+          </a>
+	</h3>
+
+	<div id="collapseOne" class="panel-collapse collapse in">
+	  
+	  <div class="thumbnail">
+	    <img src="$image_url" id="target"/>
+	  </div>
+	  
+	</div>
+
+	<hr/>
+
+	  
+	<form method="POST" action="/Result">
+	  <div class="row">
+	  $for person in persons:
+	    <div class="col-xs-12 col-md-2">
+	      <a class="thumbnail">
+		<img src="$person"/>
+	      </a>
+	      <div class="checkbox">
+		<label>
+		  <input type="checkbox" value="$person"/> name
+		</label>
+	      </div>
+	    </div>
+	  </div>
+	  <hr/>
+	  
+	$if persons:
+	  <button type="submit" class="btn btn-danger" >
+	    <span class="glyphicon glyphicon-circle-arrow-right"></span>  Continue
+	  </button>
+	</form>
+
+	$if not persons:
+	  <blockquote>
+	    <p>No valid face detected, please select from the orignal image manually.</p>
+	  </blockquote>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-3">
+      <h3>Faces</h3>
+      <div id="preview-pane">
+	<div class="preview-container">
+	  <img src="$image_url" class="jcrop-preview" alt="Preview" />
+	</div>
+      </div>
+      <hr/>
+      <form action="" method="POST" id="crop_form">
+        <input type="hidden" id="x" name="x" />
+        <input type="hidden" id="y" name="y" />
+        <input type="hidden" id="w" name="w" />
+        <input type="hidden" id="h" name="h" />
+        <button type="submit" class="btn btn-primary" >  
+	  <span class="glyphicon glyphicon-ok-sign"></span>  Crop</button>
+      </form>
+      <hr/>
+      <div class="alert alert-info">
+	<p>Scrolling down to see valid faces</p>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Sun Nov 10 11:27:01 2013
- * Modified at:   Sun Nov 10 23:32:07 2013
+ * Modified at:   Tue Nov 12 20:02:17 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -27,6 +27,7 @@ namespace kinvrf_img {
         scale_(1.3),
         face_cascade_classifier_path_("haarcascade_frontalface_alt.xml"),
         eyes_cascade_classifier_path_("haarcascade_eye.xml"),
+        external_path_("./"),
         face_number_(0) {
 
         init(path);        
@@ -40,7 +41,7 @@ namespace kinvrf_img {
         return image_;
     }
 
-    void FaceDetector::eyes() {
+    vector<Mat> FaceDetector::corrected_faces() {
         
          for (vector<Mat>::const_iterator face = faces_mat_.begin();
               face != faces_mat_.end(); face++) {
@@ -50,6 +51,16 @@ namespace kinvrf_img {
              face_correct(&face_mat);
 
          }
+
+         return corrected_faces_;
+    }
+
+    void FaceDetector::external_path(const string& path) {
+        external_path_ = path;
+    }
+
+    int FaceDetector::face_number() {
+        return faces_.size();
     }
 
     // private:
@@ -244,16 +255,16 @@ namespace kinvrf_img {
             eye->width = cvRound(eye->width * scale);
             eye->height = cvRound(eye->height * scale);
 
-            // test
+ /*           // test
             rectangle(*face,
                       Point(eye->x, eye->y),
                       Point(eye->x+eye->width, eye->y+eye->height),
                       Scalar(255,0,0));  // blue
-            
+ */            
         }
 
-        imshow("eyes", *face);
-        waitKey();
+        // imshow("eyes", *face);
+        // waitKey();
 
         return eyes;
     }
@@ -261,7 +272,7 @@ namespace kinvrf_img {
     void FaceDetector::face_correct(Mat* face) {
 
         // restrict face with 100x127
-        int i = 0;
+        // int i = 0;
         
         // eyes
         vector<Rect> eyes = eyes_detect(face);
@@ -323,11 +334,23 @@ namespace kinvrf_img {
             
             warpAffine(*face, warped_mat, rotation_mat, warped_mat.size());
             printf("%d\n", (int)eyes.size());
+
+           
+            // imwrite(external_path_ + number_to_string(i) + ".jpg", warped_mat);
+            
+
             /// for test
-            imshow("face"+number_to_string(i++), warped_mat);
-            waitKey();
+            // imshow("face", warped_mat);
+            // waitKey();
+
+            // i++;
+
+            corrected_faces_.push_back(warped_mat);
+
         } else {
             printf("%d\n", (int)eyes.size());
+            // the faces can not be correct automatically, need the user to do
+            // it manually
         }
         
 

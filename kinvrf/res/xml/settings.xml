@@ -22,9 +22,9 @@
   
   <!-- setting of face detector-->
   <setting type="number" name="ImageScale">1.3</setting>
-  <setting type="string" name="FaceCascadeClassifierPath">../../res/data/haarcascades/haarcascade_frontalface_alt.xml</setting>
-  <setting type="string" name="EyesCascadeClassifierPath">../../res/data/haarcascades/haarcascade_eye.xml</setting>
-  <setting type="string" name="EyesCascadeClassifierBackUpPath">../../res/data/haarcascades/haarcascade_mcs_eyepair_big.xml</setting>
+  <setting type="string" name="FaceCascadeClassifierPath">../res/data/haarcascades/haarcascade_frontalface_alt.xml</setting>
+  <setting type="string" name="EyesCascadeClassifierPath">../res/data/haarcascades/haarcascade_eye.xml</setting>
+  <setting type="string" name="EyesCascadeClassifierBackUpPath">../res/data/haarcascades/haarcascade_mcs_eyepair_big.xml</setting>
 
 
 </settings>

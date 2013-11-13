@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 13:27:28 2013
- * Modified at:   Sat Nov  9 22:32:54 2013
+ * Modified at:   Tue Nov 12 00:05:17 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -27,7 +27,7 @@ using namespace std;
 
 namespace kinvrf_ml { 
 
-    // Data
+/*    // Data
 
     Mat Data::data_mat() {
         return data_mat_;
@@ -67,7 +67,7 @@ namespace kinvrf_ml {
         
     }
     
-
+*/
     // DataRes is a class that used to get training data.
 
     // default constructor reads data by settings
@@ -150,7 +150,7 @@ namespace kinvrf_ml {
 
         case KINVRF_DATA_FROM_KINSHIP_V2_TEXT :
 
-            get_data_from_text();
+            // get_data_from_text();
             // read from text files
             break;
 

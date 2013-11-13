@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:31:28 2013
- * Modified at:   Wed Nov  6 22:26:17 2013
+ * Modified at:   Tue Nov 12 17:41:23 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -72,6 +72,20 @@ namespace kinvrf_img {
     Mat ImageReader::image_mat() {
         return image_is_read_ ? image_mat_ : default_mat_; 
     }
+
+    Mat ImageReader::image_crop(size_t x,
+                                size_t y,
+                                size_t w,
+                                size_t h) {
+        Mat new_image;
+        if (image_is_read_) {
+            Rect face(x, y, w, h);
+            new_image = image_mat_(face);
+        }
+
+        return new_image;
+    }
+
 
     uchar* ImageReader::image_data() {
         uchar* image_data = NULL;

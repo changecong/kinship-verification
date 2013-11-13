@@ -5,6 +5,16 @@
 │   │   ├── bin
 │   │   │   └── face-detector-test
 │   │   ├── lib
+│   │   │   ├── face_detector.o
+│   │   │   ├── image_reader.o
+│   │   │   ├── libfacedetector.so
+│   │   │   ├── libimagereader.so
+│   │   │   ├── libmldata.so
+│   │   │   ├── libtinyxml2.so
+│   │   │   ├── libxmlresource.so
+│   │   │   ├── ml_data.o
+│   │   │   ├── tinyxml2.o
+│   │   │   └── xml_resource.o
 │   │   ├── Makefile
 │   │   └── obj
 │   │       ├── darray-test.o
@@ -44,8 +54,70 @@
 │   ├── lib
 │   ├── Makefile
 │   ├── py
-│   │   ├── upload.py
-│   │   └── upload.pyc
+│   │   ├── 0.jpg
+│   │   ├── cpplib
+│   │   │   ├── eye-detect.cpp
+│   │   │   ├── eye-detect.o
+│   │   │   ├── libeyedetect.so
+│   │   │   └── Makefile
+│   │   ├── index.py
+│   │   ├── index.pyc
+│   │   ├── mycpp.py
+│   │   ├── mycpp.pyc
+│   │   ├── mydb.py
+│   │   ├── mydb.pyc
+│   │   ├── myos.py
+│   │   ├── myos.pyc
+│   │   ├── static
+│   │   │   ├── bootstrap
+│   │   │   │   ├── css
+│   │   │   │   │   ├── bootstrap.css
+│   │   │   │   │   ├── bootstrap.min.css
+│   │   │   │   │   ├── bootstrap-theme.css
+│   │   │   │   │   └── bootstrap-theme.min.css
+│   │   │   │   ├── fonts
+│   │   │   │   │   ├── glyphicons-halflings-regular.eot
+│   │   │   │   │   ├── glyphicons-halflings-regular.svg
+│   │   │   │   │   ├── glyphicons-halflings-regular.ttf
+│   │   │   │   │   └── glyphicons-halflings-regular.woff
+│   │   │   │   └── js
+│   │   │   │       ├── bootstrap.js
+│   │   │   │       └── bootstrap.min.js
+│   │   │   ├── customize
+│   │   │   │   └── sticky-footer-navbar.css
+│   │   │   ├── Jcrop
+│   │   │   │   ├── css
+│   │   │   │   │   ├── Jcrop.gif
+│   │   │   │   │   ├── jquery.Jcrop.css
+│   │   │   │   │   └── jquery.Jcrop.min.css
+│   │   │   │   └── js
+│   │   │   │       ├── jquery.color.js
+│   │   │   │       ├── jquery.Jcrop.js
+│   │   │   │       ├── jquery.Jcrop.min.js
+│   │   │   │       └── jquery.min.js
+│   │   │   └── upload
+│   │   │       ├── default.jpg
+│   │   │       ├── family
+│   │   │       │   ├── 7143286d.jpg
+│   │   │       │   └── e81314bd.jpg
+│   │   │       └── person
+│   │   │           ├── 7143286d
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   └── 2.jpg
+│   │   │           └── e81314bd
+│   │   │               ├── 0.jpg
+│   │   │               ├── 1.jpg
+│   │   │               ├── 2.jpg
+│   │   │               ├── 3.jpg
+│   │   │               ├── 4.jpg
+│   │   │               ├── 5.jpg
+│   │   │               ├── 6.jpg
+│   │   │               └── 7.jpg
+│   │   └── templates
+│   │       ├── base.html
+│   │       ├── faceconfirm.html
+│   │       └── index.html
 │   ├── res
 │   │   ├── data
 │   │   │   ├── haarcascades
@@ -106,6 +178,8 @@
 │   │   │   ├── lena.jpg
 │   │   │   ├── me.jpg
 │   │   │   └── star0.jpg
+│   │   ├── sql
+│   │   │   └── schema.sql
 │   │   ├── template
 │   │   │   └── version.h.template
 │   │   └── xml
@@ -114,7 +188,8 @@
 │   ├── src
 │   │   ├── img
 │   │   │   ├── face_detector.cpp
-│   │   │   └── image_reader.cpp
+│   │   │   ├── image_reader.cpp
+│   │   │   └── Makefile
 │   │   ├── ml
 │   │   │   ├── compile.txt
 │   │   │   ├── ml_data.cpp
@@ -150,4 +225,4 @@
 ├── README.md
 └── treegen.sh
 
-35 directories, 115 files
+52 directories, 173 files

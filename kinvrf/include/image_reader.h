@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Wed Nov  6 15:43:16 2013
+ * Modified at:   Tue Nov 12 15:24:14 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -59,6 +59,10 @@ class ImageReader {
     // void image_mat(Mat image);
     Mat image_mat();
 
+    ///\fn
+    ///\brief crop the image
+    Mat image_crop(size_t x, size_t y, size_t w, size_t h);
+    
     /// \fn
     /// \brief
     uchar* image_data();

@@ -1,7 +1,7 @@
 /*
  * Filename:      version.h.template
  * Copyright:     2013, Zhicong Chen
- * Version:       0.3.2_caf28f1
+ * Version:       0.5.0_e5404a8
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 21:36:23 2013
  * Modified at:   Tue Oct 22 22:15:07 2013
@@ -16,8 +16,8 @@
 #define KINVRF_VERSION_H
 
 #define MAJOR_VERSION_NUMBER 0
-#define MINOR_VERSION_NUMBER 3
-#define REVERSION_NUMBER 2
-#define GIT_VERSION_NUMBER caf28f1
+#define MINOR_VERSION_NUMBER 5
+#define REVERSION_NUMBER 0
+#define GIT_VERSION_NUMBER e5404a8
 
 #endif  // KINVRF_VERSION_H
