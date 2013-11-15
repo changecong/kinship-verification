@@ -5,22 +5,10 @@
 │   │   ├── bin
 │   │   │   └── face-detector-test
 │   │   ├── lib
-│   │   │   ├── face_detector.o
-│   │   │   ├── image_reader.o
-│   │   │   ├── libfacedetector.so
-│   │   │   ├── libimagereader.so
-│   │   │   ├── libmldata.so
-│   │   │   ├── libtinyxml2.so
-│   │   │   ├── libxmlresource.so
-│   │   │   ├── ml_data.o
-│   │   │   ├── tinyxml2.o
-│   │   │   └── xml_resource.o
 │   │   ├── Makefile
 │   │   └── obj
-│   │       ├── darray-test.o
-│   │       ├── date-test.o
 │   │       ├── face_detector.o
-│   │       ├── face-detector-test.o
+│   │       ├── gabor.o
 │   │       ├── image_reader.o
 │   │       ├── ml_data.o
 │   │       ├── tinyxml2.o
@@ -31,16 +19,19 @@
 │   │   ├── change_log.txt
 │   │   ├── gen
 │   │   │   ├── change_log
-│   │   │   └── change_log.cpp
+│   │   │   ├── change_log.cpp
+│   │   │   └── Makefile
 │   │   └── HowToCompile
 │   ├── include
 │   │   ├── data_resource.h
 │   │   ├── define_strings.h
 │   │   ├── face_detector.h
+│   │   ├── gabor_filter.h
 │   │   ├── image_reader.h
 │   │   ├── ml_data.h
 │   │   ├── ml_knn.cpp
 │   │   ├── ml_test_data.h
+│   │   ├── ml_train_data.h
 │   │   ├── string_convert.h
 │   │   ├── string_convert_inl.h
 │   │   ├── tinyxml2.cpp
@@ -54,7 +45,6 @@
 │   ├── lib
 │   ├── Makefile
 │   ├── py
-│   │   ├── 0.jpg
 │   │   ├── cpplib
 │   │   │   ├── eye-detect.cpp
 │   │   │   ├── eye-detect.o
@@ -98,22 +88,41 @@
 │   │   │   └── upload
 │   │   │       ├── default.jpg
 │   │   │       ├── family
-│   │   │       │   ├── 7143286d.jpg
-│   │   │       │   └── e81314bd.jpg
+│   │   │       │   ├── 41644d01.jpg
+│   │   │       │   ├── 7c20da93.jpg
+│   │   │       │   ├── 8eaea51b.jpg
+│   │   │       │   ├── 8eff9b4f.jpg
+│   │   │       │   ├── b5745948.jpg
+│   │   │       │   ├── bb39ae34.jpg
+│   │   │       │   ├── ed3d602d.jpg
+│   │   │       │   ├── fb063e23.jpg
+│   │   │       │   └── fc9712b6.jpg
 │   │   │       └── person
-│   │   │           ├── 7143286d
+│   │   │           ├── 41644d01
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── 3.jpg
+│   │   │           ├── 7c20da93
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   └── 4.jpg
+│   │   │           ├── 8eaea51b
+│   │   │           ├── 8eff9b4f
+│   │   │           ├── b5745948
+│   │   │           │   └── 0.jpg
+│   │   │           ├── bb39ae34
+│   │   │           │   ├── 0.jpg
+│   │   │           │   └── 1.jpg
+│   │   │           ├── ed3d602d
+│   │   │           ├── fb063e23
 │   │   │           │   ├── 0.jpg
 │   │   │           │   ├── 1.jpg
 │   │   │           │   └── 2.jpg
-│   │   │           └── e81314bd
-│   │   │               ├── 0.jpg
-│   │   │               ├── 1.jpg
-│   │   │               ├── 2.jpg
-│   │   │               ├── 3.jpg
-│   │   │               ├── 4.jpg
-│   │   │               ├── 5.jpg
-│   │   │               ├── 6.jpg
-│   │   │               └── 7.jpg
+│   │   │           └── fc9712b6
+│   │   │               └── 0.jpg
 │   │   └── templates
 │   │       ├── base.html
 │   │       ├── faceconfirm.html
@@ -145,10 +154,14 @@
 │   │   │   │   └── haarcascade_upperbody.xml
 │   │   │   ├── hogcascades
 │   │   │   │   └── hogcascade_pedestrians.xml
-│   │   │   └── lbpcascades
-│   │   │       ├── lbpcascade_frontalface.xml
-│   │   │       ├── lbpcascade_profileface.xml
-│   │   │       └── lbpcascade_silverware.xml
+│   │   │   ├── lbpcascades
+│   │   │   │   ├── lbpcascade_frontalface.xml
+│   │   │   │   ├── lbpcascade_profileface.xml
+│   │   │   │   └── lbpcascade_silverware.xml
+│   │   │   └── mat
+│   │   │       ├── ChildEigenVector.xml
+│   │   │       ├── YoungParentEigenVector1.xml
+│   │   │       └── YoungParentEigenVector.xml
 │   │   ├── img
 │   │   │   ├── eye0.jpg
 │   │   │   ├── family0.jpg
@@ -186,30 +199,37 @@
 │   │       ├── settings.xml
 │   │       └── string.xml
 │   ├── src
+│   │   ├── filter
+│   │   │   ├── gabor.cpp
+│   │   │   └── Makefile
 │   │   ├── img
 │   │   │   ├── face_detector.cpp
 │   │   │   ├── image_reader.cpp
 │   │   │   └── Makefile
 │   │   ├── ml
 │   │   │   ├── compile.txt
+│   │   │   ├── Makefile
 │   │   │   ├── ml_data.cpp
 │   │   │   └── ml_knn.cpp
-│   │   ├── training
 │   │   └── xml
 │   │       ├── Makefile
-│   │       ├── test.xml
-│   │       ├── xml_resource.cpp
-│   │       └── xmltest.cpp
+│   │       └── xml_resource.cpp
 │   ├── test
 │   │   ├── darray-test
 │   │   │   ├── darray-test
 │   │   │   └── darray-test.cpp
 │   │   ├── data-test
-│   │   │   ├── compile.txt
 │   │   │   ├── data-test
-│   │   │   └── data-test.cpp
+│   │   │   ├── data-test.cpp
+│   │   │   ├── date-test.o
+│   │   │   └── Makefile
 │   │   ├── face-detector-test
 │   │   │   └── face-detector-test.cpp
+│   │   ├── gabor-test
+│   │   │   ├── gabor-test
+│   │   │   ├── gabor-test.cpp
+│   │   │   ├── gabor-test.o
+│   │   │   └── Makefile
 │   │   ├── image-reader-test
 │   │   │   ├── image-reader-test.cpp
 │   │   │   ├── Makefile
@@ -225,4 +245,4 @@
 ├── README.md
 └── treegen.sh
 
-52 directories, 173 files
+61 directories, 184 files

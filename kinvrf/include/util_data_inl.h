@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Nov  5 22:24:51 2013
- * Modified at:   Wed Nov  6 13:57:44 2013
+ * Modified at:   Thu Nov 14 23:23:43 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -17,6 +17,15 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <string.h>
+
+#include "string_convert.h"
+#include "include/util_get_resource.h"
+#include "types.h"
+#include "image_reader.h"
+
+using namespace kinvrf_scvt;
+using namespace kinvrf_res;
+using namespace kinvrf_img;
 
 namespace kinvrf_ml {
 
@@ -74,6 +83,35 @@ namespace kinvrf_ml {
         
     }
 
+
+    inline string string_setting(const string name) {
+
+        XMLRes* xml_resource = get_resource()->get_xml();
+
+        // get setting ImageDataPath
+        Setting_t setting = xml_resource->get_setting(name);
+
+        if(KINVRF_XML_RESOURCE_TYPE_STRING == setting.first) {
+            return setting.second;
+        } 
+        
+        return "";
+    }
+
+    inline int int_setting(const string name) {
+
+        XMLRes* xml_resource = get_resource()->get_xml();
+
+        // get setting ImageDataPath
+        Setting_t setting = xml_resource->get_setting(name);
+
+        if(KINVRF_XML_RESOURCE_TYPE_NUMBER == setting.first) {
+            return string_to_int(setting.second);
+        } 
+        
+        return 0;
+    }
+
     ///\fn
     ///\brief
     template<typename T>
@@ -82,6 +120,70 @@ namespace kinvrf_ml {
             free(arr);
         }
     }
+
+    ///\fn
+    ///\brief
+    uchar* image_pre_process(int orientation, 
+                             int scale, 
+                             ImageReader* ir, 
+                             size_t& length);
+
+
+    ///\fn
+    ///\brief all mat file are write into a same path with differen name
+    inline void save_mat(Mat& mat, const string& filename, const string& matname) {
+        
+        // check if the name is a vilad xml file name
+ 
+        // get path from setting
+
+        String path = string_setting(KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGEPATH);
+
+        FileStorage fs(path + filename, FileStorage::WRITE);
+        
+        fs << matname << mat;
+        
+        fs.release();
+    }
+
+    inline Mat read_mat(const string& filename, const string& matname) {
+
+        String path = string_setting(KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGEPATH);
+
+        FileStorage fs( path + filename, FileStorage::READ);  
+
+        Mat mat;  
+
+        fs[matname] >> mat;
+
+        return mat;
+
+    }
+    
+    inline Pca_t pca_subspace_feature(Mat& gabor_feature) {
+        
+        Pca_t pca_vector;
+
+        int max_components = int_setting(KINVRF_XML_RESOURCE_SETTING_PCAMAXCOMPONENTS);
+
+        PCA pca(gabor_feature, Mat(), CV_PCA_DATA_AS_ROW, max_components);
+
+        Mat subspace_feature = pca.project(gabor_feature);
+        pca_vector.push_back(subspace_feature);
+
+        // write into a xml file
+
+        Mat eigen_values = pca.eigenvalues;
+        pca_vector.push_back(eigen_values);
+        
+        Mat eigen_vectors = pca.eigenvectors;
+        pca_vector.push_back(eigen_vectors);
+        
+
+        return pca_vector;
+
+    }
+
 
 }  // namespace kinvrf_ml
 

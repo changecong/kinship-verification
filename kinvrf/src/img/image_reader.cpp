@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:31:28 2013
- * Modified at:   Tue Nov 12 17:41:23 2013
+ * Modified at:   Thu Nov 14 15:47:46 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -17,13 +17,13 @@
 namespace kinvrf_img {
 // constructors
     ImageReader::ImageReader() :
-        default_mat_(32, 32, CV_8UC1) {
+        default_mat_(32, 32, CV_32FC1) {
         // call the init()
         init();
     }
 
     ImageReader::ImageReader(string path) :
-        default_mat_(32, 32, CV_8UC1) {
+        default_mat_(32, 32, CV_32FC1) {
         // image_path_ = path;
     
         // get the image by opencv api
@@ -56,7 +56,7 @@ namespace kinvrf_img {
 // }
 
     ImageReader::ImageReader(const Mat& mat) : 
-        default_mat_(32, 32, CV_8UC1) {
+        default_mat_(32, 32, CV_32FC1) {
         if (mat.empty()) {
             init();
         } else {
@@ -71,6 +71,17 @@ namespace kinvrf_img {
 
     Mat ImageReader::image_mat() {
         return image_is_read_ ? image_mat_ : default_mat_; 
+    }
+
+    Mat ImageReader::image_gray() {
+        Mat ret;
+        if (image_is_read_) {
+            cvtColor(image_mat_, ret, CV_BGR2GRAY);
+        } else {
+            cvtColor(default_mat_, ret, CV_BGR2GRAY);
+        }
+
+        return ret;
     }
 
     Mat ImageReader::image_crop(size_t x,

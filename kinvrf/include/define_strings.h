@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 14:40:58 2013
- * Modified at:   Sun Nov 10 21:47:46 2013
+ * Modified at:   Thu Nov 14 22:12:53 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -71,5 +71,13 @@ const string KINVRF_XML_RESOURCE_SETTING_IMAGESCALE = "ImageScale";
 const string KINVRF_XML_RESOURCE_SETTING_FACECASCADECLASSIFIERPATH = "FaceCascadeClassifierPath";
 const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERPATH = "EyesCascadeClassifierPath";
 const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERBACKUPPATH = "EyesCascadeClassifierBackUpPath";
+
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATARESOURCEPATH = "TrainingDataResourcePath";
+const string KINVRF_XML_RESOURCE_SETTING_PCAMAXCOMPONENTS = "PCAMaxComponents";
+
+const string KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGEPATH = "MatFileStoragePath";
+const string KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGENAME = "MatFileStorageName";
+const string KINVRF_XML_RESOURCE_SETTING_MATNAME = "MatName";
+
 
 #endif  // KINVRF_DEFINE_STRING_H

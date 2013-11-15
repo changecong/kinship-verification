@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 29 17:17:07 2013
- * Modified at:   Tue Oct 29 21:03:22 2013
+ * Modified at:   Wed Nov 13 18:00:13 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -32,14 +32,22 @@ namespace kinvrf_ml {
         ///\param k: k nearest neighbor
         ///       ir: ImageReader object contains image information
         ///       td: The training data
-        static void knn_classifier(int k, ImageReader* ir,
-                                   TrainData* td);
+        static void classifier(int k, TestData* test_data,
+                                   TrainData* train_data);
 
     private:
 
         // helper methods
+        void init();
 
-        void 
+        void knn(int k, Mat* data);
+
+        Mat test_data_one_;
+        Mat test_data_two_;
+        Mat train_data_pos_;
+        Mat train_data_neg_;
+
+        int row_number_;  ///< the row number of training data
     
 
     };

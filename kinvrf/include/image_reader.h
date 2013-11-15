@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 22 23:02:16 2013
- * Modified at:   Tue Nov 12 15:24:14 2013
+ * Modified at:   Thu Nov 14 15:45:17 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class that read image in before processing. 
@@ -58,6 +58,10 @@ class ImageReader {
     /// \brief set and get image_mat_
     // void image_mat(Mat image);
     Mat image_mat();
+
+    ///\fn
+    ///\brief return a gray scale image;
+    Mat image_gray();
 
     ///\fn
     ///\brief crop the image

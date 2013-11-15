@@ -4,7 +4,7 @@
 ## Version:       v1.0.0
 ## Author:        Zhicong Chen <zhicong.chen@changecong.com>
 ## Created at:    Tue Oct 22 21:47:44 2013
-## Modified at:   Tue Nov 12 20:08:13 2013
+## Modified at:   Thu Nov 14 23:47:35 2013
 ## Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
 ## Status:        Experimental, do not distribute.
 ## Description:   This is a bash code used to automatically generate
@@ -28,7 +28,7 @@ if [ $LOCALVER \> 1 ] ; then
     # 	VER="$(VER)M"
     # fi
     VER_GIT="$(git rev-list HEAD -n 1 | cut -c 1-7)"
-    VER_PRE=40  # number that before a major version or minor version update 
+    VER_PRE=41  # number that before a major version or minor version update 
     REVERSION=$(($VER-$VER_PRE))   
     GIT_VERSION=$VER_GIT
 else
@@ -39,7 +39,7 @@ fi
 rm -f config.git-hash
 
 MAJOR_VERSION=0
-MINOR_VERSION=5  # data module partly done
+MINOR_VERSION=6  # data module partly done
 
 # generate a new version.h
 cat res/template/version.h.template | sed "s/\MMAJOR_VERSION/$MAJOR_VERSION/g" | sed "s/\MMINOR_VERSION/$MINOR_VERSION/g" | sed "s/\MGIT_VERSION/$GIT_VERSION/g" |sed "s/\MREVERSION/$REVERSION/g" > include/version.h

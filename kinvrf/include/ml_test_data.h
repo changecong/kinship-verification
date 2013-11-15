@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  8 12:20:50 2013
- * Modified at:   Fri Nov  8 12:49:48 2013
+ * Modified at:   Wed Nov 13 11:54:28 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   This is a class used to generate test data.
@@ -26,25 +26,44 @@ namespace kinvrf_ml {
     ///\class
     ///\brief
 
-    class TestData : virtual public Data {
+    class TestData : public Data {
 
       public:
+
+        ///\fn
+        ///\brief
+        TestData(const string& path_one, const string& path_two);
+
+        ///\fn
+        ///\brief
+        Mat test_data_one();
         
         ///\fn
         ///\brief
-        vitual TestData();
-
-        ///\fn
-        ///\brief
-        explicit TestData(const string& path_one, const string& path_two);
+        Mat test_data_two();
 
       private:
 
+        ///\fn
+        ///\brief
+        TestData();
+
+        ///\fn
+        ///\brief
+        void init();
+
+        ///\fn
+        ///\brief
+        void get_data();
+
         string image_one_;  ///< path of the first image
         string image_two_;  ///< path of the second image
+
+        Mat test_data_one_;
+        Mat test_data_two_;
 
     };  // class TestData 
 
 }  // namespace kinvrf_ml
 
-#endl  // KINVRF_ML_TEST_DATA_H
+#endif  // KINVRF_ML_TEST_DATA_H

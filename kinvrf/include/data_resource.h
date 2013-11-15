@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 29 21:20:56 2013
- * Modified at:   Wed Nov  6 22:49:21 2013
+ * Modified at:   Thu Nov 14 22:28:16 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   For each image, we use one single channel and set the size to 
@@ -33,6 +33,11 @@ namespace kinvrf_ml {
         KINVRF_DATA_FROM_INTERNAL_SETTING = 4
     };
 
+    enum SHIFTBY {
+        KINVRF_BY_ROW = 0,
+        KINVRF_BY_COL = 1
+    };
+
     ///\class DataRes
     ///\brief Basicall, we may have multiple set of data that need to be used.
     ///       For each set of data, we put them into a different folder. Thus,
@@ -54,7 +59,7 @@ namespace kinvrf_ml {
         DataRes();
 
         ///\fn
-        ///\brief
+        ///\brief construct data resource with the path name
         explicit DataRes(const string& s);
 
         ///\fn
@@ -77,6 +82,18 @@ namespace kinvrf_ml {
         ///\brief re-generate the matrix after changing the path or other options
         void renew();
 
+        ///\fn
+        ///\brief shift data by row or col
+        Mat shift_data(size_t k, SHIFTBY by);
+
+        ///\fn
+        ///\brief save the eigen vectors into a xml file
+        void gen_eigen_vectors();
+
+        ///\fn
+        ///\brief 
+        void gen_feature_data();
+
         
       private:
 
@@ -88,7 +105,13 @@ namespace kinvrf_ml {
         ///\brief
         void get_data(DATARES data_res);
 
+        ///\fn
+        ///\brief
         void get_data_from_image();
+
+        ///\fn
+        ///\brief
+        void get_data_from_xml();
 
         // helper functions
         ///\fn
@@ -115,7 +138,7 @@ namespace kinvrf_ml {
 
         ///\fn
         ///\brief
-        string string_setting(const string name);
+        /// string string_setting(const string name);
 
 
         DATARES data_res_;
@@ -132,8 +155,8 @@ namespace kinvrf_ml {
 
         // need an array, dynamitally allocated
 
-
-        
+        Mat data_eigen_values_;  ///< eigen values
+        Mat data_eigen_vectors_;  ///< eigen vectors
         Mat data_mat_;  ///< used to store data;       
 
     };  // class DataRes

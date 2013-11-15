@@ -6,3 +6,8 @@
 1. image preprocessing done
 2. front end partly done
 
+== 0.6.0 ==
+1. Gabor filter done
+2. PCA done
+3. now the training data can be generated automatically through c++ function, stored in xml files
+

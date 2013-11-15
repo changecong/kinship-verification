@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Wed Nov  6 10:42:43 2013
- * Modified at:   Tue Nov 12 00:02:47 2013
+ * Modified at:   Wed Nov 13 13:56:50 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -27,11 +27,7 @@ namespace kinvrf_ml {
 
       public:
 
-        Data();
-
-        ///\fn
-        ///\brief
-        Mat data_mat();
+        Data(){};
         
       private:
 
@@ -39,7 +35,7 @@ namespace kinvrf_ml {
         ///\brief
         virtual void get_data() = 0;
 
-        Mat data_mat_;
+        // methods that used for data processing
 
     };  // class Data
 

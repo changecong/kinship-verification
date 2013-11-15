@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 10:54:37 2013
- * Modified at:   Wed Nov  6 19:47:16 2013
+ * Modified at:   Wed Nov 13 12:18:47 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   use some new C++ 11 feature
@@ -18,10 +18,17 @@
 
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 namespace kinvrf_scvt {
+
+    inline double string_to_double(const string& s);
+    inline int string_to_int(const string& s);
+    template <typename T> inline string number_to_string(T number);
+    inline vector<string> string_split(string& src_str, const string& split_str);
+    inline string string_trim(const string& src_str);
 
     // string to number
 
@@ -66,6 +73,44 @@ namespace kinvrf_scvt {
         
         // call std::to_string
         return to_string(number);  
+    }
+
+    ///\fn
+    ///\brief split string by 
+    inline vector<string> string_split(string& src_str, const string& split_str) {
+        
+        vector<string> result;
+        string::size_type pos_1, pos_2;
+        
+        pos_2 = src_str.find(split_str);
+        pos_1 = 0;
+
+        while(string::npos != pos_2) {
+            result.push_back(string_trim(src_str.substr(pos_1, pos_2 - pos_1)));
+
+            pos_1 = pos_2 + 1;
+            pos_2 = src_str.find(' ', pos_1);
+        }
+
+        result.push_back(string_trim(src_str.substr(pos_1)));
+
+        return result;
+    }
+
+    ///\fn
+    ///\brief trim
+    inline string string_trim(const string& src_str) {
+        if (src_str.empty())   
+        {  
+            return src_str;  
+        }  
+  
+        string result = src_str;
+
+        result.erase(0, result.find_first_not_of(" "));  
+        result.erase(result.find_last_not_of(" ") + 1);  
+    
+        return result;          
     }
 
 }  // namespcae kinvrf_scvt
