@@ -1,4 +1,4 @@
-$def with (image_url, persons)
+$def with (image_url, persons, smallfaces)
 
 <script type="text/javascript">
   jQuery(function($$){
@@ -99,17 +99,33 @@ $def with (image_url, persons)
 
 	<hr/>
 
-	  
-	<form method="POST" action="/Result">
+	<script type="text/javascript">
+	  $$(document).ready(function(){
+	    $$("button[name='continue']").attr('disabled', true);
+
+            $$('input[type=checkbox]').click(function() {
+              $$("input[name='checkbox']").attr('disabled', true);
+              if ($$("input[name='checkbox']:checked").length >= 2) {
+                $$("input[name='checkbox']:checked").attr('disabled', false);
+	        $$("button[name='continue']").attr('disabled', false);
+              } else {
+                $$("input[name='checkbox']").attr('disabled', false);
+	        $$("button[name='continue']").attr('disabled', true);
+              }
+            });
+ 
+          })
+	</script>
+
+	<form method="GET" action="/ageconfirm">
 	  <div class="row">
 	  $for person in persons:
 	    <div class="col-xs-12 col-md-2">
-	      <a class="thumbnail">
-		<img src="$person"/>
-	      </a>
+	      <img src="$person" class="img-thumbnail"/>
+	      
 	      <div class="checkbox">
 		<label>
-		  <input type="checkbox" value="$person"/> name
+		  <input id="checkbox" type="checkbox" name="checkbox" value="$person"/> name
 		</label>
 	      </div>
 	    </div>
@@ -117,7 +133,7 @@ $def with (image_url, persons)
 	  <hr/>
 	  
 	$if persons:
-	  <button type="submit" class="btn btn-danger" >
+	  <button type="submit" class="btn btn-danger" name="continue">
 	    <span class="glyphicon glyphicon-circle-arrow-right"></span>  Continue
 	  </button>
 	</form>
@@ -146,8 +162,19 @@ $def with (image_url, persons)
 	  <span class="glyphicon glyphicon-ok-sign"></span>  Crop</button>
       </form>
       <hr/>
+       
       <div class="alert alert-info">
+	<p>$len(smallfaces) face(s) detected, $len(persons) face(s) have been corrected. </p>
 	<p>Scrolling down to see valid faces</p>
+      </div>
+      <hr/>
+      <div class="row">
+      $for face in smallfaces:
+        <div class="col-md-6">
+	    <img src="$face" class="img-thumbnail"/>
+	  </a>
+	</div>
+
       </div>
     </div>
   </div>

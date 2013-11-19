@@ -1,0 +1,53 @@
+$def with (iskin, young, old)
+
+<style>
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+
+.jumbotron span {
+  font-size: 60px;
+}
+
+.buttons {
+  text-align: center;
+}
+.buttons .btn {
+  font-size: 21px;
+}
+
+</style>
+<div class="container">
+
+  <!-- Jumbotron -->
+  <div class="jumbotron" >
+    $if iskin:
+      <h1>Yes !</h1>
+    $else:
+      <h1>OOOps !</h1>
+    
+    <br/>
+    <p>
+      <img src="$old" class="img-thumbnail">
+      $if iskin:
+        <span> is </span>
+      $else:
+	<span> may not be </span>
+      <img src="$young" class="img-thumbnail">
+      <span> 's Parent!</span>
+    </p>
+  </div>
+
+  <div class="row buttons">
+    <div class=" col-md-6">
+      <a class="btn btn-lg btn-success" href="#" role="button">It is correct!</a>
+    </div>
+
+    <div class=" col-md-6">
+      <a class="btn btn-lg btn-danger" href="#" role="button">It is wrong!</a>
+    </div>
+
+  </div>
+
+</div>

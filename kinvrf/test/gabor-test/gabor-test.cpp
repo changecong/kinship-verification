@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Thu Nov 14 12:52:01 2013
- * Modified at:   Thu Nov 14 19:17:43 2013
+ * Modified at:   Sun Nov 17 09:05:48 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -48,6 +48,7 @@ int main() {
     cout << "real : " << real.rows << " x " << real.cols << endl;
     cout << "subspace : " << subspace_feature.rows << " x " << subspace_feature.cols << endl;
     cout << "eigen value : " << eigen_values.rows << " x " << eigen_values.cols << endl;
+    cout << "eigen value : " << eigen_values << endl;
     cout << "eigen vector : " << eigen_vectors.rows << " x " << eigen_vectors.cols << endl;
 
     

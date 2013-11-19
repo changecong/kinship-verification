@@ -1,0 +1,29 @@
+$def with (faces)
+
+<div class="container">
+  <div class="page-header">
+    <h1>Confirmation</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-12">  
+      <p class="lead">Please select who is older.</p>
+      <form method="GET" action="/result">
+	$for face in faces:
+	  <label class="radio-inline">
+	    <input type="radio" name="olderradio" value="$face">
+            <img src="$face" class="img-thumbnail"/>
+	  </label>
+	  <input type="hidden" name="images" value="$face" />
+	
+	<label class="radio-inline">
+          <input type="radio" name="olderradio" value="dontknow"> I don't know
+	</label>
+	
+	<button type="submit" class="btn btn-primary">
+	  <span class="glyphicon glyphicon-ok-circle"></span> Submit
+	</button>
+      </form>
+    </div>
+  </div>
+</div>
+

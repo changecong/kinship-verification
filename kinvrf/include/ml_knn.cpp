@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Oct 29 17:17:07 2013
- * Modified at:   Wed Nov 13 18:00:13 2013
+ * Modified at:   Sun Nov 17 12:40:10 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -16,41 +16,58 @@
 
 #include "image_reader.h"
 
+///\namespace kinvrf_ml
+///\brief Contains functions and classes which are defined for Machine Learning module of the project.
 namespace kinvrf_ml {
 
-///\class
-///\brief a class that contain static function used to perform knn verification
+    ///\class MlKNN
+    ///\brief A class that used to perform knn verification.
     class MlKNN {
 
     public:
-    
-        MlKNN(){};
+        
+        ///\fn MlKNN()
+        ///\brief The constructor.
+        MlKNN() : 
+            neg_percent_(-1.0) {};
+
+        ///\fn ~MlKNN()
+        ///\brief The distructor.
         ~MlKNN(){};
     
+        ///\fn void classifier(int k, TestData* test_data, TrainData* train_data);
+        ///\param [in] k          The number of the nearest neighbors.
+        ///\param [in] test_data  An TestData object pointer which contains the test data.
+        ///\param [in] train_data An TrainData object pointer wihch contains the training data.
+        ///\brief Used to classify by KNN.
+        void classifier(int k, TestData* test_data,
+                        TrainData* train_data);
+
         ///\fn
-        ///\brief used to classify
-        ///\param k: k nearest neighbor
-        ///       ir: ImageReader object contains image information
-        ///       td: The training data
-        static void classifier(int k, TestData* test_data,
-                                   TrainData* train_data);
+        bool is_positive();
 
     private:
 
-        // helper methods
+        ///\fn void init()
         void init();
 
-        void knn(int k, Mat* data);
+        ///\fn void knn(int k, Mat& data)
+        void knn(int k, Mat& data);
 
-        Mat test_data_one_;
-        Mat test_data_two_;
-        Mat train_data_pos_;
-        Mat train_data_neg_;
+        ///\fn bool MlKNN::sort_by(pair<double, int>& arg0, pair<double, int>& arg1)
+        ///\brief A helper funtion for sorting
+        bool MlKNN::sort_by(pair<double, int>& arg0, pair<double, int>& arg1);
 
-        int row_number_;  ///< the row number of training data
-    
+        Mat test_data_one_;   ///< First set of test data.
+        Mat test_data_two_;   ///< Second set of test data.
+        Mat train_data_pos_;  ///< The positive training data.
+        Mat train_data_neg_;  ///< The negative training data.
 
-    };
+        int row_number_;  ///< The row number of training data.
+
+        double neg_percent_;
+
+    };  // class MlKNN
 
 }  // namespace kinvrf_ml
 

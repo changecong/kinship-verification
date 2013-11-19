@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Sun Nov 10 11:27:01 2013
- * Modified at:   Tue Nov 12 20:02:17 2013
+ * Modified at:   Sun Nov 17 18:04:01 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -53,6 +53,53 @@ namespace kinvrf_img {
          }
 
          return corrected_faces_;
+    }
+
+    vector<Mat> FaceDetector::detected_faces() {
+        
+        vector<Mat> face_vec;
+
+        for (vector<Rect>::const_iterator face = raw_faces_.begin();
+             face != raw_faces_.end(); face++) {
+            
+            Mat one_face = image_(*face);
+            // resize face to 70x70
+            Mat small = Mat(70,70,CV_8UC1);
+            resize(one_face,  // src image 
+               small,  // dis image
+               small.size(),  // size
+               0,  // scale of x 
+               0,  // scale of y
+               // INTER_NEAREST
+               INTER_LINEAR
+               // INTER_CUBIC
+               // INTER_AREA
+               // INTER_LANCZOS4
+            );
+
+            // imshow("why", small);
+            // waitKey();
+
+            face_vec.push_back(small);
+
+        }
+
+        return face_vec;
+    }
+
+    int FaceDetector::detected_faces(const string& path) {
+        
+        vector<Mat> face_vec = detected_faces();
+        string small_face_path = path;
+        int i = 0;
+        for (vector<Mat>::const_iterator face = face_vec.begin();
+             face != face_vec.end(); face++, i++) {
+            
+            imwrite(small_face_path + number_to_string(i) + ".jpg",
+                    *face);
+        }
+
+        return face_number();
     }
 
     void FaceDetector::external_path(const string& path) {
@@ -168,13 +215,13 @@ namespace kinvrf_img {
 
     vector<Rect> FaceDetector::eyes_detect(Mat* face) {
 
-        double scale = 0.9;
+        double scale = 1.1;
 
         if (face->empty()) {
             // TODO Warning
         }
 
-        if (face->rows > 127) {
+        if (face->rows > 200) {
             scale = scale_;
         }
 

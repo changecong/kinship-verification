@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Tue Nov 12 23:06:27 2013
- * Modified at:   Wed Nov 13 13:59:34 2013
+ * Modified at:   Sun Nov 17 11:37:25 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -38,6 +38,14 @@ namespace kinvrf_ml {
 
       private:
 
+        ///\enum DATAFORMAT
+        ///\brief Determint the data comes from images or xml file.
+        enum DATAFORMAT {
+            IMAGE_DATA = 0,  ///< from image data
+            XML_DATA   = 1   ///< from xml file
+        };
+
+
         ///\fn
         ///\brief initialization
         void init();
@@ -45,6 +53,31 @@ namespace kinvrf_ml {
         ///\fn
         ///\brief
         void get_data();
+
+        ///\fn int get_data_format()
+        ///\return A DATAFORMAT enum.
+        ///\brief get the traning data format from settings.xml
+        DATAFORMAT get_data_format();
+
+        ///\fn string get_younger_data()
+        ///\return A string value.
+        ///\brief Get the data set xml file of younger person from settings.xml
+        string get_younger_xml();
+
+        ///\fn string get_elder_data()
+        ///\return A string value.
+        ///\brief Get the data set xml file of elder person from settings.xml
+        string get_elder_xml();
+
+        ///\fn string get_younger_mat_name()
+        ///\return A string value.
+        ///\brief Get the mat data name of younger person from settings.xml
+        string get_younger_mat_name();
+
+        ///\fn string get_younger_mat_name()
+        ///\return A string value.
+        ///\brief Get the mat data name of elder person from settings.xml
+        string get_elder_mat_name();
 
         ///\fn
         ///\brief get paths from setting

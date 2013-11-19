@@ -4,7 +4,7 @@
 ## Version:       
 ## Author:        Zhicong Chen <zhicong.chen@changecong.com>
 ## Created at:    Mon Nov 11 14:54:09 2013
-## Modified at:   Tue Nov 12 13:03:35 2013
+## Modified at:   Sun Nov 17 18:41:25 2013
 ## Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
 ## Status:        Experimental, do not distribute.
 ## Description:   
@@ -17,21 +17,32 @@ db = web.database(dbn='mysql', user='kinvrf', pw='kinvrf', db='kinvrfDB')
 '''
 |========|       |========|        |==============|
 |t_family|<------|t_person|<-------|   t_kinship  |
-|========|       |========|<-------|==============|
-|    f_id|       |    p_id|        |          k_id|
-|--------|       |--------|        |--------------|
-|   f_url|       |   p_url|        |        p_id_1|
-|--------|       |--------|        |--------------|
-|  f_name|       |  p_name|        |        p_id_2|
-|--------|       |--------|        |--------------|
-|  f_time|       |p_gender|        |k_relationship|
-|--------|       |--------|        |--------------|
-                 |    f_id|
-                 |--------|
+|========|<--    |========|<-------|==============|
+|    f_id|   |   |    p_id|        |          k_id|
+|--------|   |   |--------|        |--------------|
+|   f_url|   |   |   p_url|        |        p_id_1|
+|--------|   |   |--------|        |--------------|
+|  f_name|   |   |  p_name|        |        p_id_2|
+|--------|   |   |--------|        |--------------|
+|  f_time|   |   |p_gender|        |k_relationship|
+|--------|   |   |--------|        |--------------|
+             |   |    f_id|
+             |   |--------|
+             |
+              ---|============|
+                 |t_small_face|
+                 |============|
+                 |        s_id|
+                 |------------|
+                 |       s_url|
+                 |------------|
+                 |        f_id|
+                 |------------|
 
 '''
 family = 't_family'
 person = 't_person'
+small_face = 't_small_face'
 kinship = 't_kinship'
 
 # put the new upload image into the database, set family name to empty
@@ -55,3 +66,11 @@ def new_person(path, f_id):
 # get all image with a family
 def get_family_numbers(id):
     return db.select(person, what='p_url', where='f_id=$id', vars=dict(id=id))
+
+# insert small face
+def new_small_face(path, f_id):
+    id = db.insert(small_face, s_url=path, f_id=f_id)
+
+# get all small face of a family
+def get_family_small_faces(id):
+    return db.select(small_face, what='s_url', where='f_id=$id', vars=dict(id=id))

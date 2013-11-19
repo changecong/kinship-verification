@@ -14,6 +14,8 @@ treegen.sh
 
 # ignore all executable test file
 kinvrf/build/bin/
+kinvrf/doc/html/
+kinvrf/doc/latex/
 
 # ignore all .img file
 *.bmp

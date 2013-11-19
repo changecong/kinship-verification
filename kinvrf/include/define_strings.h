@@ -4,12 +4,17 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 14:40:58 2013
- * Modified at:   Thu Nov 14 22:12:53 2013
+ * Modified at:   Sun Nov 17 11:41:28 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
  *
  */
+
+
+///\file define_strings.h
+///\brief Define constant string s that corresponding to the atrributes 
+///       that used in settings.xml and string.xml files.
 
 #ifndef KINVRF_DEFINE_STRINGS_H
 #define KINVRF_DEFINE_STRINGS_H
@@ -73,11 +78,23 @@ const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERPATH = "EyesCascad
 const string KINVRF_XML_RESOURCE_SETTING_EYESCASCADECLASSIFIERBACKUPPATH = "EyesCascadeClassifierBackUpPath";
 
 const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATARESOURCEPATH = "TrainingDataResourcePath";
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATARESOURCETYPE = "TrainingDataResourceType";
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATAYOUNGERFEATURES = "TrainingDataYoungerFeatures";
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATAELDERFEATURES = "TrainingDataElderFeatures";
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATAYOUNGERMATNAME = "TrainingDataYoungerMatName";
+const string KINVRF_XML_RESOURCE_SETTING_TRAININGDATAELDERMATNAME = "TrainingDataElderMatName";
+
+
 const string KINVRF_XML_RESOURCE_SETTING_PCAMAXCOMPONENTS = "PCAMaxComponents";
 
 const string KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGEPATH = "MatFileStoragePath";
 const string KINVRF_XML_RESOURCE_SETTING_MATFILESTORAGENAME = "MatFileStorageName";
 const string KINVRF_XML_RESOURCE_SETTING_MATNAME = "MatName";
+
+const string KINVRF_XML_RESOURCE_SETTING_TESTDATAYOUNGEREIGENVECTORS = "TestDataYoungerEigenVectors";
+const string KINVRF_XML_RESOURCE_SETTING_TESTDATAELDEREIGENVECTORS = "TestDataElderEigenVectors";
+const string KINVRF_XML_RESOURCE_SETTING_TESTDATAYOUNGERMATNAME = "TestDataYoungerMatName";
+const string KINVRF_XML_RESOURCE_SETTING_TESTDATAELDERMATNAME = "TestDataElderMatName";
 
 
 #endif  // KINVRF_DEFINE_STRING_H

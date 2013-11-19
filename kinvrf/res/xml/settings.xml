@@ -4,26 +4,26 @@
   <!-- =============================== DATA RESOURCE ========================================================= -->
   <!-- FOR DATA RESOURCE -->  
   <!-- settings of data resource
-       0: from image of kinship_v2 database
-       1: from text of kinship_v2 database
+       0: from image of KinFace_v2 database
+       1: from xml of KinFace_v2 database
        2: from external images
-       3: from external text -->
-  <setting type="number" name="DataResource">0</setting>
+       3: from external xml -->
+  <setting type="number" name="DataResource">3</setting>
 
   <!-- setting of image number if use images as resource,
        I suggest no more than 200 -->
   <setting type="number" name="ImageDataNumber">200</setting>
 
   <!-- setting of image data path corresponding to DATARes -->
-  <setting type="string" name="ImageDataPath">../../res/img/</setting>  
+  <setting type="string" name="ImageDataPath">../../res/img/KinFace_V2/03_part/</setting>  
   <!-- setting of the image name and type -->
   <setting type="string" name="ImageNamePrefix"></setting>
   <setting type="string" name="ImageNameSuffix">L1</setting>
   <setting type="string" name="ImageTypeSuffix">.bmp</setting>
 
   <!-- settings of where to store the mat xml file -->
-  <setting type="string" name="MatFileStoragePath">../../res/data/mat/</setting>
-  <setting type="string" name="MatFileStorageName">YoungParentEigenVector.xml</setting>
+  <setting type="string" name="MatFileStoragePath">../res/data/mat/</setting>
+  <setting type="string" name="MatFileStorageName">OldParentEigenVectors.xml</setting>
   <setting type="string" name="MatName">eigen_vectors</setting>
 
   <!-- ======================================== PCA ========================================================== -->
@@ -34,13 +34,21 @@
   <!-- this setting declare the type of training data resource 
        0: image
        1: xml -->
-  <setting type="number" name="TrainingDataResourceType">0</setting>
+  <setting type="number" name="TrainingDataResourceType">1</setting>
   <!-- it may contain several paths, which are split by ',' -->
-  <setting type="string" name="TrainingDataResourcePath">../../res/img/KinFace_V2/01_part/;../../res/img/KinFace_V2/02_part/</setting>
+  <setting type="string" name="TrainingDataResourcePath">../res/data/mat/;../res/data/mat/</setting>
+
+  <setting type="string" name="TrainingDataYoungerFeatures">ChildFeatures.xml</setting>
+  <setting type="string" name="TrainingDataYoungerMatName">features</setting>
+  <setting type="string" name="TrainingDataElderFeatures">YoungParentFeatures.xml</setting>
+  <setting type="string" name="TrainingDataElderMatName">features</setting>
   
   <!-- =========================================== TEST DATA ================================================= -->
-  <setting type="string" name=""></setting>
-  <setting type="string" name=""></setting>
+  <setting type="string" name="TestDataYoungerEigenVectors">ChildEigenVectors.xml</setting>
+  <setting type="string" name="TestDataYoungerMatName">eigen_vectors</setting>
+
+  <setting type="string" name="TestDataElderEigenVectors">OldParentEigenVectors.xml</setting>
+  <setting type="string" name="TestDataElderMatName">eigen_vectors</setting>
 
 
   <!-- ============================== FACE AND EYE DETECTION ================================================= -->

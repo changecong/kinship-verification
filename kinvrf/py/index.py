@@ -4,7 +4,7 @@
 ## Version:       
 ## Author:        Zhicong Chen <zhicong.chen@changecong.com>
 ## Created at:    Mon Nov 11 11:34:15 2013
-## Modified at:   Tue Nov 12 20:05:42 2013
+## Modified at:   Sun Nov 17 22:21:41 2013
 ## Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
 ## Status:        Experimental, do not distribute.
 ## Description:   
@@ -22,10 +22,12 @@ for class index
 image_url = "static/upload/default.jpg"
 enable= ["", "disabled"]
 lastid = 0;
+submitted = 0;
 '''
 for class faceconfirm
 '''
 persons_url = []
+small_faces_url = []
 persons_path = ''
 facenum = 0;
 
@@ -36,6 +38,7 @@ render = web.template.render('templates/', base='base')
 urls = (
     '/', 'Index',
     '/faceconfirm', 'FaceConfirm',
+    '/ageconfirm', 'AgeConfirm',
     '/result', 'Result'
     )
 
@@ -48,7 +51,26 @@ class Index:
 
     def GET(self):
 
-        global image_url, enable
+        global submitted, image_url, enable
+
+        if not submitted == 0:
+            # reset all 
+            global lastid
+
+            image_url = "static/upload/default.jpg"
+            enable= ["", "disabled"]
+            lastid = 0;
+            submitted = 0;
+
+            global persons_url, small_faces_url, persons_path, facenum
+
+            persons_url = []
+            small_faces_url = []
+            persons_path = ''
+            facenum = 0;
+
+        
+
         url = image_url
         return render.index(url, enable)
 
@@ -108,7 +130,7 @@ class Index:
         global enable
         enable[0] = 'disabled'
         enable[1] = ''
-
+        
         raise web.seeother('/')
 
 '''
@@ -119,13 +141,17 @@ class FaceConfirm:
 
     def GET(self):
 
+        global submitted
         
-        global persons_url
+        submitted = 1
+
+        global persons_url, small_faces_url
         global facenum
         global persons_path
         global image_url
         
         persons_url = []
+        small_faces_url = []
 
         # call c++ to process the image.
         # pass image_url in, generate faces
@@ -138,27 +164,41 @@ class FaceConfirm:
         path = "static/upload/person/"
         myos.mkdir(path)
         path = "static/upload/person/" + filenameprefix + "/"
-        sucess = myos.mkdir(path)
+        success = myos.mkdir(path)
+        # for small image
+        smallsuccess = myos.mkdir(path+'small/')
+
         persons_path = path
 
-        if sucess:
+        if success:
 
-            facenum = mycpp.eyedetect(image_url, path)
-            print "face number: " + str(facenum)
+            facenum, smallnum = mycpp.eyedetect(image_url, path)
+            print "eyes face number: " + str(facenum)
             # write image into data base
             for i in range(facenum):
                 mydb.new_person(path+str(i)+'.jpg', lastid)
-    
+
+            # write small image into data base
+            for j in range(smallnum):
+                mydb.new_small_face(path+'small/'+str(j)+'.jpg', lastid)
+
+
         # read from database
         familynumbers = mydb.get_family_numbers(lastid)
         print familynumbers
         for person in familynumbers:
             persons_url.append(person['p_url'])
 
+        # read small images from data
+        smallfaces = mydb.get_family_small_faces(lastid)
+        print smallfaces
+        for face in smallfaces:
+            small_faces_url.append(face['s_url'])
+
         # print self.persons_url
         # pass all to template        
 
-        return render.faceconfirm(image_url, persons_url)
+        return render.faceconfirm(image_url, persons_url, small_faces_url)
 
     def POST(self):
 
@@ -185,14 +225,65 @@ class FaceConfirm:
 
         # get the submit and the do the cut by c++
         raise web.seeother('/faceconfirm')
-'''
-class Result:
+
+class AgeConfirm:
 
     def GET(self):
+
+        #get the post
+        info = web.input(checkbox=[])
+        # print info
+        if 'checkbox' in info:
+            faces = info['checkbox']
+            
+
+        return render.ageconfirm(faces)
+
         
 
-        def POST(self):
-'''
+    def POST(self):
+        
+        print "hello"
+
+class Result:
+    
+
+    def GET(self):
+        #get the post
+        info = web.input(olderradio=[], images=[])
+        older = []
+        images = []
+
+        if 'olderradio' in info:
+            older = info['olderradio']
+            
+        if 'images' in info:
+            images = info['images']
+
+        print older
+        print images
+
+        old = older[0]
+        if old == 'dontknow':
+            # do something
+            print "hello"
+        else:
+            i = images.index(old)
+            images.remove(old)
+            young = images[0]
+
+            print young
+            print old
+            # pass into cpp code
+
+            iskin = mycpp.iskin(young, old)
+
+        if iskin : 
+            print "true"
+        else:
+            print "false"
+
+        return render.result(iskin, young, old)
 
 if __name__ == '__main__':
     app = web.application(urls, globals())

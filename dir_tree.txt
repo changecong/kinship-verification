@@ -3,17 +3,19 @@
 ├── kinvrf
 │   ├── build
 │   │   ├── bin
-│   │   │   └── face-detector-test
+│   │   │   └── gen_training_data
 │   │   ├── lib
 │   │   ├── Makefile
 │   │   └── obj
 │   │       ├── face_detector.o
 │   │       ├── gabor.o
 │   │       ├── image_reader.o
+│   │       ├── main
+│   │       │   └── gen_training_data.o
 │   │       ├── ml_data.o
+│   │       ├── ml_knn.o
 │   │       ├── tinyxml2.o
-│   │       ├── xml_resource.o
-│   │       └── xml_test.o
+│   │       └── xml_resource.o
 │   ├── contrib
 │   ├── doc
 │   │   ├── change_log.txt
@@ -21,7 +23,564 @@
 │   │   │   ├── change_log
 │   │   │   ├── change_log.cpp
 │   │   │   └── Makefile
-│   │   └── HowToCompile
+│   │   ├── HowToCompile
+│   │   ├── html
+│   │   │   ├── annotated.html
+│   │   │   ├── bc_s.png
+│   │   │   ├── bdwn.png
+│   │   │   ├── classes.html
+│   │   │   ├── classkinvrf__fltr_1_1GaborFilter.html
+│   │   │   ├── classkinvrf__fltr_1_1GaborFilter-members.html
+│   │   │   ├── classkinvrf__img_1_1FaceDetector.html
+│   │   │   ├── classkinvrf__img_1_1FaceDetector-members.html
+│   │   │   ├── classkinvrf__img_1_1ImageReader.html
+│   │   │   ├── classkinvrf__img_1_1ImageReader-members.html
+│   │   │   ├── classkinvrf__ml_1_1Data.html
+│   │   │   ├── classkinvrf__ml_1_1Data-members.html
+│   │   │   ├── classkinvrf__ml_1_1Data.png
+│   │   │   ├── classkinvrf__ml_1_1DataRes.html
+│   │   │   ├── classkinvrf__ml_1_1DataRes-members.html
+│   │   │   ├── classkinvrf__ml_1_1MlKNN.html
+│   │   │   ├── classkinvrf__ml_1_1MlKNN-members.html
+│   │   │   ├── classkinvrf__ml_1_1TestData.html
+│   │   │   ├── classkinvrf__ml_1_1TestData-members.html
+│   │   │   ├── classkinvrf__ml_1_1TestData.png
+│   │   │   ├── classkinvrf__ml_1_1TrainData.html
+│   │   │   ├── classkinvrf__ml_1_1TrainData-members.html
+│   │   │   ├── classkinvrf__ml_1_1TrainData.png
+│   │   │   ├── classkinvrf__res_1_1Resource.html
+│   │   │   ├── classkinvrf__res_1_1Resource-members.html
+│   │   │   ├── classkinvrf__xml_1_1XMLRes.html
+│   │   │   ├── classkinvrf__xml_1_1XMLRes-members.html
+│   │   │   ├── classtinyxml2_1_1DynArray.html
+│   │   │   ├── classtinyxml2_1_1DynArray-members.html
+│   │   │   ├── classtinyxml2_1_1MemPool.html
+│   │   │   ├── classtinyxml2_1_1MemPool-members.html
+│   │   │   ├── classtinyxml2_1_1MemPool.png
+│   │   │   ├── classtinyxml2_1_1MemPoolT.html
+│   │   │   ├── classtinyxml2_1_1MemPoolT-members.html
+│   │   │   ├── classtinyxml2_1_1MemPoolT.png
+│   │   │   ├── classtinyxml2_1_1StrPair.html
+│   │   │   ├── classtinyxml2_1_1StrPair-members.html
+│   │   │   ├── classtinyxml2_1_1XMLAttribute.html
+│   │   │   ├── classtinyxml2_1_1XMLAttribute-members.html
+│   │   │   ├── classtinyxml2_1_1XMLComment.html
+│   │   │   ├── classtinyxml2_1_1XMLComment-members.html
+│   │   │   ├── classtinyxml2_1_1XMLComment.png
+│   │   │   ├── classtinyxml2_1_1XMLConstHandle.html
+│   │   │   ├── classtinyxml2_1_1XMLConstHandle-members.html
+│   │   │   ├── classtinyxml2_1_1XMLDeclaration.html
+│   │   │   ├── classtinyxml2_1_1XMLDeclaration-members.html
+│   │   │   ├── classtinyxml2_1_1XMLDeclaration.png
+│   │   │   ├── classtinyxml2_1_1XMLDocument.html
+│   │   │   ├── classtinyxml2_1_1XMLDocument-members.html
+│   │   │   ├── classtinyxml2_1_1XMLDocument.png
+│   │   │   ├── classtinyxml2_1_1XMLElement.html
+│   │   │   ├── classtinyxml2_1_1XMLElement-members.html
+│   │   │   ├── classtinyxml2_1_1XMLElement.png
+│   │   │   ├── classtinyxml2_1_1XMLHandle.html
+│   │   │   ├── classtinyxml2_1_1XMLHandle-members.html
+│   │   │   ├── classtinyxml2_1_1XMLNode.html
+│   │   │   ├── classtinyxml2_1_1XMLNode-members.html
+│   │   │   ├── classtinyxml2_1_1XMLNode.png
+│   │   │   ├── classtinyxml2_1_1XMLPrinter.html
+│   │   │   ├── classtinyxml2_1_1XMLPrinter-members.html
+│   │   │   ├── classtinyxml2_1_1XMLPrinter.png
+│   │   │   ├── classtinyxml2_1_1XMLText.html
+│   │   │   ├── classtinyxml2_1_1XMLText-members.html
+│   │   │   ├── classtinyxml2_1_1XMLText.png
+│   │   │   ├── classtinyxml2_1_1XMLUnknown.html
+│   │   │   ├── classtinyxml2_1_1XMLUnknown-members.html
+│   │   │   ├── classtinyxml2_1_1XMLUnknown.png
+│   │   │   ├── classtinyxml2_1_1XMLUtil.html
+│   │   │   ├── classtinyxml2_1_1XMLUtil-members.html
+│   │   │   ├── classtinyxml2_1_1XMLVisitor.html
+│   │   │   ├── classtinyxml2_1_1XMLVisitor-members.html
+│   │   │   ├── classtinyxml2_1_1XMLVisitor.png
+│   │   │   ├── closed.png
+│   │   │   ├── data__resource_8h.html
+│   │   │   ├── data__resource_8h_source.html
+│   │   │   ├── define__strings_8h.html
+│   │   │   ├── define__strings_8h_source.html
+│   │   │   ├── dir_68267d1309a1af8e8297ef4c3efbcdba.html
+│   │   │   ├── dir_7673ec780970b264223275c6ce2fb0e1.html
+│   │   │   ├── dir_8681a82a265081a91d191144ff606af9.html
+│   │   │   ├── dir_90ccbedd30978fa304e0881c1341fa84.html
+│   │   │   ├── dir_c43b215a2ade73e6562bd37d8a11c12a.html
+│   │   │   ├── dir_d44c64559bbebec7f509842c48db8b23.html
+│   │   │   ├── doxygen.css
+│   │   │   ├── doxygen.png
+│   │   │   ├── dynsections.js
+│   │   │   ├── face__detector_8cpp.html
+│   │   │   ├── face__detector_8h.html
+│   │   │   ├── face__detector_8h_source.html
+│   │   │   ├── files.html
+│   │   │   ├── ftv2blank.png
+│   │   │   ├── ftv2cl.png
+│   │   │   ├── ftv2doc.png
+│   │   │   ├── ftv2folderclosed.png
+│   │   │   ├── ftv2folderopen.png
+│   │   │   ├── ftv2lastnode.png
+│   │   │   ├── ftv2link.png
+│   │   │   ├── ftv2mlastnode.png
+│   │   │   ├── ftv2mnode.png
+│   │   │   ├── ftv2mo.png
+│   │   │   ├── ftv2node.png
+│   │   │   ├── ftv2ns.png
+│   │   │   ├── ftv2plastnode.png
+│   │   │   ├── ftv2pnode.png
+│   │   │   ├── ftv2splitbar.png
+│   │   │   ├── ftv2vertline.png
+│   │   │   ├── functions_0x61.html
+│   │   │   ├── functions_0x62.html
+│   │   │   ├── functions_0x63.html
+│   │   │   ├── functions_0x64.html
+│   │   │   ├── functions_0x65.html
+│   │   │   ├── functions_0x66.html
+│   │   │   ├── functions_0x67.html
+│   │   │   ├── functions_0x68.html
+│   │   │   ├── functions_0x69.html
+│   │   │   ├── functions_0x6b.html
+│   │   │   ├── functions_0x6c.html
+│   │   │   ├── functions_0x6d.html
+│   │   │   ├── functions_0x6e.html
+│   │   │   ├── functions_0x6f.html
+│   │   │   ├── functions_0x70.html
+│   │   │   ├── functions_0x71.html
+│   │   │   ├── functions_0x72.html
+│   │   │   ├── functions_0x73.html
+│   │   │   ├── functions_0x74.html
+│   │   │   ├── functions_0x75.html
+│   │   │   ├── functions_0x76.html
+│   │   │   ├── functions_0x77.html
+│   │   │   ├── functions_0x78.html
+│   │   │   ├── functions_0x7e.html
+│   │   │   ├── functions_eval.html
+│   │   │   ├── functions_func_0x62.html
+│   │   │   ├── functions_func_0x63.html
+│   │   │   ├── functions_func_0x64.html
+│   │   │   ├── functions_func_0x65.html
+│   │   │   ├── functions_func_0x66.html
+│   │   │   ├── functions_func_0x67.html
+│   │   │   ├── functions_func_0x68.html
+│   │   │   ├── functions_func_0x69.html
+│   │   │   ├── functions_func_0x6b.html
+│   │   │   ├── functions_func_0x6c.html
+│   │   │   ├── functions_func_0x6d.html
+│   │   │   ├── functions_func_0x6e.html
+│   │   │   ├── functions_func_0x6f.html
+│   │   │   ├── functions_func_0x70.html
+│   │   │   ├── functions_func_0x71.html
+│   │   │   ├── functions_func_0x72.html
+│   │   │   ├── functions_func_0x73.html
+│   │   │   ├── functions_func_0x74.html
+│   │   │   ├── functions_func_0x75.html
+│   │   │   ├── functions_func_0x76.html
+│   │   │   ├── functions_func_0x77.html
+│   │   │   ├── functions_func_0x78.html
+│   │   │   ├── functions_func_0x7e.html
+│   │   │   ├── functions_func.html
+│   │   │   ├── functions.html
+│   │   │   ├── functions_rela.html
+│   │   │   ├── functions_vars.html
+│   │   │   ├── gabor_8cpp.html
+│   │   │   ├── gabor__filter_8h.html
+│   │   │   ├── gabor__filter_8h_source.html
+│   │   │   ├── globals_defs.html
+│   │   │   ├── globals.html
+│   │   │   ├── globals_type.html
+│   │   │   ├── globals_vars.html
+│   │   │   ├── hierarchy.html
+│   │   │   ├── image__reader_8cpp.html
+│   │   │   ├── image__reader_8h.html
+│   │   │   ├── image__reader_8h_source.html
+│   │   │   ├── include_2ml__knn_8cpp.html
+│   │   │   ├── index.html
+│   │   │   ├── jquery.js
+│   │   │   ├── ml__data_8cpp.html
+│   │   │   ├── ml__data_8h.html
+│   │   │   ├── ml__data_8h_source.html
+│   │   │   ├── ml__test__data_8h.html
+│   │   │   ├── ml__test__data_8h_source.html
+│   │   │   ├── ml__train__data_8h.html
+│   │   │   ├── ml__train__data_8h_source.html
+│   │   │   ├── namespacekinvrf__fltr.html
+│   │   │   ├── namespacekinvrf__img.html
+│   │   │   ├── namespacekinvrf__ml.html
+│   │   │   ├── namespacekinvrf__res.html
+│   │   │   ├── namespacekinvrf__scvt.html
+│   │   │   ├── namespacekinvrf__xml.html
+│   │   │   ├── namespacemembers_enum.html
+│   │   │   ├── namespacemembers_eval.html
+│   │   │   ├── namespacemembers_func.html
+│   │   │   ├── namespacemembers.html
+│   │   │   ├── namespacemembers_vars.html
+│   │   │   ├── namespaces.html
+│   │   │   ├── namespacetinyxml2.html
+│   │   │   ├── nav_f.png
+│   │   │   ├── nav_g.png
+│   │   │   ├── nav_h.png
+│   │   │   ├── open.png
+│   │   │   ├── search
+│   │   │   │   ├── all_5f.html
+│   │   │   │   ├── all_5f.js
+│   │   │   │   ├── all_61.html
+│   │   │   │   ├── all_61.js
+│   │   │   │   ├── all_62.html
+│   │   │   │   ├── all_62.js
+│   │   │   │   ├── all_63.html
+│   │   │   │   ├── all_63.js
+│   │   │   │   ├── all_64.html
+│   │   │   │   ├── all_64.js
+│   │   │   │   ├── all_65.html
+│   │   │   │   ├── all_65.js
+│   │   │   │   ├── all_66.html
+│   │   │   │   ├── all_66.js
+│   │   │   │   ├── all_67.html
+│   │   │   │   ├── all_67.js
+│   │   │   │   ├── all_68.html
+│   │   │   │   ├── all_68.js
+│   │   │   │   ├── all_69.html
+│   │   │   │   ├── all_69.js
+│   │   │   │   ├── all_6b.html
+│   │   │   │   ├── all_6b.js
+│   │   │   │   ├── all_6c.html
+│   │   │   │   ├── all_6c.js
+│   │   │   │   ├── all_6d.html
+│   │   │   │   ├── all_6d.js
+│   │   │   │   ├── all_6e.html
+│   │   │   │   ├── all_6e.js
+│   │   │   │   ├── all_6f.html
+│   │   │   │   ├── all_6f.js
+│   │   │   │   ├── all_70.html
+│   │   │   │   ├── all_70.js
+│   │   │   │   ├── all_71.html
+│   │   │   │   ├── all_71.js
+│   │   │   │   ├── all_72.html
+│   │   │   │   ├── all_72.js
+│   │   │   │   ├── all_73.html
+│   │   │   │   ├── all_73.js
+│   │   │   │   ├── all_74.html
+│   │   │   │   ├── all_74.js
+│   │   │   │   ├── all_75.html
+│   │   │   │   ├── all_75.js
+│   │   │   │   ├── all_76.html
+│   │   │   │   ├── all_76.js
+│   │   │   │   ├── all_77.html
+│   │   │   │   ├── all_77.js
+│   │   │   │   ├── all_78.html
+│   │   │   │   ├── all_78.js
+│   │   │   │   ├── all_7e.html
+│   │   │   │   ├── all_7e.js
+│   │   │   │   ├── classes_64.html
+│   │   │   │   ├── classes_64.js
+│   │   │   │   ├── classes_65.html
+│   │   │   │   ├── classes_65.js
+│   │   │   │   ├── classes_66.html
+│   │   │   │   ├── classes_66.js
+│   │   │   │   ├── classes_67.html
+│   │   │   │   ├── classes_67.js
+│   │   │   │   ├── classes_69.html
+│   │   │   │   ├── classes_69.js
+│   │   │   │   ├── classes_6d.html
+│   │   │   │   ├── classes_6d.js
+│   │   │   │   ├── classes_72.html
+│   │   │   │   ├── classes_72.js
+│   │   │   │   ├── classes_73.html
+│   │   │   │   ├── classes_73.js
+│   │   │   │   ├── classes_74.html
+│   │   │   │   ├── classes_74.js
+│   │   │   │   ├── classes_78.html
+│   │   │   │   ├── classes_78.js
+│   │   │   │   ├── close.png
+│   │   │   │   ├── defines_64.html
+│   │   │   │   ├── defines_64.js
+│   │   │   │   ├── defines_67.html
+│   │   │   │   ├── defines_67.js
+│   │   │   │   ├── defines_6b.html
+│   │   │   │   ├── defines_6b.js
+│   │   │   │   ├── defines_6d.html
+│   │   │   │   ├── defines_6d.js
+│   │   │   │   ├── defines_72.html
+│   │   │   │   ├── defines_72.js
+│   │   │   │   ├── defines_74.html
+│   │   │   │   ├── defines_74.js
+│   │   │   │   ├── enums_64.html
+│   │   │   │   ├── enums_64.js
+│   │   │   │   ├── enums_73.html
+│   │   │   │   ├── enums_73.js
+│   │   │   │   ├── enums_77.html
+│   │   │   │   ├── enums_77.js
+│   │   │   │   ├── enums_78.html
+│   │   │   │   ├── enums_78.js
+│   │   │   │   ├── enumvalues_61.html
+│   │   │   │   ├── enumvalues_61.js
+│   │   │   │   ├── enumvalues_63.html
+│   │   │   │   ├── enumvalues_63.js
+│   │   │   │   ├── enumvalues_6b.html
+│   │   │   │   ├── enumvalues_6b.js
+│   │   │   │   ├── enumvalues_6e.html
+│   │   │   │   ├── enumvalues_6e.js
+│   │   │   │   ├── enumvalues_6f.html
+│   │   │   │   ├── enumvalues_6f.js
+│   │   │   │   ├── enumvalues_70.html
+│   │   │   │   ├── enumvalues_70.js
+│   │   │   │   ├── enumvalues_74.html
+│   │   │   │   ├── enumvalues_74.js
+│   │   │   │   ├── enumvalues_78.html
+│   │   │   │   ├── enumvalues_78.js
+│   │   │   │   ├── files_64.html
+│   │   │   │   ├── files_64.js
+│   │   │   │   ├── files_66.html
+│   │   │   │   ├── files_66.js
+│   │   │   │   ├── files_67.html
+│   │   │   │   ├── files_67.js
+│   │   │   │   ├── files_69.html
+│   │   │   │   ├── files_69.js
+│   │   │   │   ├── files_6d.html
+│   │   │   │   ├── files_6d.js
+│   │   │   │   ├── files_73.html
+│   │   │   │   ├── files_73.js
+│   │   │   │   ├── files_74.html
+│   │   │   │   ├── files_74.js
+│   │   │   │   ├── files_75.html
+│   │   │   │   ├── files_75.js
+│   │   │   │   ├── files_76.html
+│   │   │   │   ├── files_76.js
+│   │   │   │   ├── files_78.html
+│   │   │   │   ├── files_78.js
+│   │   │   │   ├── functions_61.html
+│   │   │   │   ├── functions_61.js
+│   │   │   │   ├── functions_62.html
+│   │   │   │   ├── functions_62.js
+│   │   │   │   ├── functions_63.html
+│   │   │   │   ├── functions_63.js
+│   │   │   │   ├── functions_64.html
+│   │   │   │   ├── functions_64.js
+│   │   │   │   ├── functions_65.html
+│   │   │   │   ├── functions_65.js
+│   │   │   │   ├── functions_66.html
+│   │   │   │   ├── functions_66.js
+│   │   │   │   ├── functions_67.html
+│   │   │   │   ├── functions_67.js
+│   │   │   │   ├── functions_68.html
+│   │   │   │   ├── functions_68.js
+│   │   │   │   ├── functions_69.html
+│   │   │   │   ├── functions_69.js
+│   │   │   │   ├── functions_6b.html
+│   │   │   │   ├── functions_6b.js
+│   │   │   │   ├── functions_6c.html
+│   │   │   │   ├── functions_6c.js
+│   │   │   │   ├── functions_6d.html
+│   │   │   │   ├── functions_6d.js
+│   │   │   │   ├── functions_6e.html
+│   │   │   │   ├── functions_6e.js
+│   │   │   │   ├── functions_6f.html
+│   │   │   │   ├── functions_6f.js
+│   │   │   │   ├── functions_70.html
+│   │   │   │   ├── functions_70.js
+│   │   │   │   ├── functions_71.html
+│   │   │   │   ├── functions_71.js
+│   │   │   │   ├── functions_72.html
+│   │   │   │   ├── functions_72.js
+│   │   │   │   ├── functions_73.html
+│   │   │   │   ├── functions_73.js
+│   │   │   │   ├── functions_74.html
+│   │   │   │   ├── functions_74.js
+│   │   │   │   ├── functions_75.html
+│   │   │   │   ├── functions_75.js
+│   │   │   │   ├── functions_76.html
+│   │   │   │   ├── functions_76.js
+│   │   │   │   ├── functions_77.html
+│   │   │   │   ├── functions_77.js
+│   │   │   │   ├── functions_78.html
+│   │   │   │   ├── functions_78.js
+│   │   │   │   ├── functions_7e.html
+│   │   │   │   ├── functions_7e.js
+│   │   │   │   ├── mag_sel.png
+│   │   │   │   ├── namespaces_6b.html
+│   │   │   │   ├── namespaces_6b.js
+│   │   │   │   ├── namespaces_74.html
+│   │   │   │   ├── namespaces_74.js
+│   │   │   │   ├── nomatches.html
+│   │   │   │   ├── related_78.html
+│   │   │   │   ├── related_78.js
+│   │   │   │   ├── search.css
+│   │   │   │   ├── search.js
+│   │   │   │   ├── search_l.png
+│   │   │   │   ├── search_m.png
+│   │   │   │   ├── search_r.png
+│   │   │   │   ├── typedefs_70.html
+│   │   │   │   ├── typedefs_70.js
+│   │   │   │   ├── typedefs_73.html
+│   │   │   │   ├── typedefs_73.js
+│   │   │   │   ├── variables_5f.html
+│   │   │   │   ├── variables_5f.js
+│   │   │   │   ├── variables_63.html
+│   │   │   │   ├── variables_63.js
+│   │   │   │   ├── variables_64.html
+│   │   │   │   ├── variables_64.js
+│   │   │   │   ├── variables_65.html
+│   │   │   │   ├── variables_65.js
+│   │   │   │   ├── variables_66.html
+│   │   │   │   ├── variables_66.js
+│   │   │   │   ├── variables_68.html
+│   │   │   │   ├── variables_68.js
+│   │   │   │   ├── variables_69.html
+│   │   │   │   ├── variables_69.js
+│   │   │   │   ├── variables_6b.html
+│   │   │   │   ├── variables_6b.js
+│   │   │   │   ├── variables_6c.html
+│   │   │   │   ├── variables_6c.js
+│   │   │   │   ├── variables_6e.html
+│   │   │   │   ├── variables_6e.js
+│   │   │   │   ├── variables_6f.html
+│   │   │   │   ├── variables_6f.js
+│   │   │   │   ├── variables_70.html
+│   │   │   │   ├── variables_70.js
+│   │   │   │   ├── variables_72.html
+│   │   │   │   ├── variables_72.js
+│   │   │   │   ├── variables_73.html
+│   │   │   │   ├── variables_73.js
+│   │   │   │   ├── variables_74.html
+│   │   │   │   ├── variables_74.js
+│   │   │   │   ├── variables_76.html
+│   │   │   │   ├── variables_76.js
+│   │   │   │   ├── variables_77.html
+│   │   │   │   └── variables_77.js
+│   │   │   ├── src_2ml_2ml__knn_8cpp.html
+│   │   │   ├── string__convert_8h.html
+│   │   │   ├── string__convert_8h_source.html
+│   │   │   ├── string__convert__inl_8h.html
+│   │   │   ├── string__convert__inl_8h_source.html
+│   │   │   ├── structtinyxml2_1_1Entity.html
+│   │   │   ├── structtinyxml2_1_1Entity-members.html
+│   │   │   ├── sync_off.png
+│   │   │   ├── sync_on.png
+│   │   │   ├── tab_a.png
+│   │   │   ├── tab_b.png
+│   │   │   ├── tab_h.png
+│   │   │   ├── tabs.css
+│   │   │   ├── tab_s.png
+│   │   │   ├── tinyxml2_8cpp.html
+│   │   │   ├── tinyxml2_8h.html
+│   │   │   ├── tinyxml2_8h_source.html
+│   │   │   ├── types_8h.html
+│   │   │   ├── types_8h_source.html
+│   │   │   ├── util__data__inl_8h.html
+│   │   │   ├── util__data__inl_8h_source.html
+│   │   │   ├── util__get__resource_8h.html
+│   │   │   ├── util__get__resource_8h_source.html
+│   │   │   ├── util__get__resource__inl_8h.html
+│   │   │   ├── util__get__resource__inl_8h_source.html
+│   │   │   ├── version_8h.html
+│   │   │   ├── version_8h_source.html
+│   │   │   ├── xml__resource_8cpp.html
+│   │   │   ├── xml__resource_8h.html
+│   │   │   └── xml__resource_8h_source.html
+│   │   └── latex
+│   │       ├── annotated.tex
+│   │       ├── classkinvrf__fltr_1_1GaborFilter.tex
+│   │       ├── classkinvrf__img_1_1FaceDetector.tex
+│   │       ├── classkinvrf__img_1_1ImageReader.tex
+│   │       ├── classkinvrf__ml_1_1Data.eps
+│   │       ├── classkinvrf__ml_1_1Data.pdf
+│   │       ├── classkinvrf__ml_1_1DataRes.tex
+│   │       ├── classkinvrf__ml_1_1Data.tex
+│   │       ├── classkinvrf__ml_1_1MlKNN.tex
+│   │       ├── classkinvrf__ml_1_1TestData.eps
+│   │       ├── classkinvrf__ml_1_1TestData.pdf
+│   │       ├── classkinvrf__ml_1_1TestData.tex
+│   │       ├── classkinvrf__ml_1_1TrainData.eps
+│   │       ├── classkinvrf__ml_1_1TrainData.pdf
+│   │       ├── classkinvrf__ml_1_1TrainData.tex
+│   │       ├── classkinvrf__res_1_1Resource.tex
+│   │       ├── classkinvrf__xml_1_1XMLRes.tex
+│   │       ├── classtinyxml2_1_1DynArray.tex
+│   │       ├── classtinyxml2_1_1MemPool.eps
+│   │       ├── classtinyxml2_1_1MemPool.pdf
+│   │       ├── classtinyxml2_1_1MemPoolT.eps
+│   │       ├── classtinyxml2_1_1MemPool.tex
+│   │       ├── classtinyxml2_1_1MemPoolT.pdf
+│   │       ├── classtinyxml2_1_1MemPoolT.tex
+│   │       ├── classtinyxml2_1_1StrPair.tex
+│   │       ├── classtinyxml2_1_1XMLAttribute.tex
+│   │       ├── classtinyxml2_1_1XMLComment.eps
+│   │       ├── classtinyxml2_1_1XMLComment.pdf
+│   │       ├── classtinyxml2_1_1XMLComment.tex
+│   │       ├── classtinyxml2_1_1XMLConstHandle.tex
+│   │       ├── classtinyxml2_1_1XMLDeclaration.eps
+│   │       ├── classtinyxml2_1_1XMLDeclaration.pdf
+│   │       ├── classtinyxml2_1_1XMLDeclaration.tex
+│   │       ├── classtinyxml2_1_1XMLDocument.eps
+│   │       ├── classtinyxml2_1_1XMLDocument.pdf
+│   │       ├── classtinyxml2_1_1XMLDocument.tex
+│   │       ├── classtinyxml2_1_1XMLElement.eps
+│   │       ├── classtinyxml2_1_1XMLElement.pdf
+│   │       ├── classtinyxml2_1_1XMLElement.tex
+│   │       ├── classtinyxml2_1_1XMLHandle.tex
+│   │       ├── classtinyxml2_1_1XMLNode.eps
+│   │       ├── classtinyxml2_1_1XMLNode.pdf
+│   │       ├── classtinyxml2_1_1XMLNode.tex
+│   │       ├── classtinyxml2_1_1XMLPrinter.eps
+│   │       ├── classtinyxml2_1_1XMLPrinter.pdf
+│   │       ├── classtinyxml2_1_1XMLPrinter.tex
+│   │       ├── classtinyxml2_1_1XMLText.eps
+│   │       ├── classtinyxml2_1_1XMLText.pdf
+│   │       ├── classtinyxml2_1_1XMLText.tex
+│   │       ├── classtinyxml2_1_1XMLUnknown.eps
+│   │       ├── classtinyxml2_1_1XMLUnknown.pdf
+│   │       ├── classtinyxml2_1_1XMLUnknown.tex
+│   │       ├── classtinyxml2_1_1XMLUtil.tex
+│   │       ├── classtinyxml2_1_1XMLVisitor.eps
+│   │       ├── classtinyxml2_1_1XMLVisitor.pdf
+│   │       ├── classtinyxml2_1_1XMLVisitor.tex
+│   │       ├── data__resource_8h.tex
+│   │       ├── define__strings_8h.tex
+│   │       ├── dir_68267d1309a1af8e8297ef4c3efbcdba.tex
+│   │       ├── dir_7673ec780970b264223275c6ce2fb0e1.tex
+│   │       ├── dir_8681a82a265081a91d191144ff606af9.tex
+│   │       ├── dir_90ccbedd30978fa304e0881c1341fa84.tex
+│   │       ├── dir_c43b215a2ade73e6562bd37d8a11c12a.tex
+│   │       ├── dir_d44c64559bbebec7f509842c48db8b23.tex
+│   │       ├── doxygen.sty
+│   │       ├── face__detector_8cpp.tex
+│   │       ├── face__detector_8h.tex
+│   │       ├── files.tex
+│   │       ├── gabor_8cpp.tex
+│   │       ├── gabor__filter_8h.tex
+│   │       ├── hierarchy.tex
+│   │       ├── image__reader_8cpp.tex
+│   │       ├── image__reader_8h.tex
+│   │       ├── include_2ml__knn_8cpp.tex
+│   │       ├── Makefile
+│   │       ├── ml__data_8cpp.tex
+│   │       ├── ml__data_8h.tex
+│   │       ├── ml__test__data_8h.tex
+│   │       ├── ml__train__data_8h.tex
+│   │       ├── namespacekinvrf__fltr.tex
+│   │       ├── namespacekinvrf__img.tex
+│   │       ├── namespacekinvrf__ml.tex
+│   │       ├── namespacekinvrf__res.tex
+│   │       ├── namespacekinvrf__scvt.tex
+│   │       ├── namespacekinvrf__xml.tex
+│   │       ├── namespaces.tex
+│   │       ├── namespacetinyxml2.tex
+│   │       ├── refman.tex
+│   │       ├── src_2ml_2ml__knn_8cpp.tex
+│   │       ├── string__convert_8h.tex
+│   │       ├── string__convert__inl_8h.tex
+│   │       ├── structtinyxml2_1_1Entity.tex
+│   │       ├── tinyxml2_8cpp.tex
+│   │       ├── tinyxml2_8h.tex
+│   │       ├── types_8h.tex
+│   │       ├── util__data__inl_8h.tex
+│   │       ├── util__get__resource_8h.tex
+│   │       ├── util__get__resource__inl_8h.tex
+│   │       ├── version_8h.tex
+│   │       ├── xml__resource_8cpp.tex
+│   │       └── xml__resource_8h.tex
+│   ├── Doxyfile
 │   ├── include
 │   │   ├── data_resource.h
 │   │   ├── define_strings.h
@@ -30,6 +589,7 @@
 │   │   ├── image_reader.h
 │   │   ├── ml_data.h
 │   │   ├── ml_knn.cpp
+│   │   ├── ml_knn.h
 │   │   ├── ml_test_data.h
 │   │   ├── ml_train_data.h
 │   │   ├── string_convert.h
@@ -88,45 +648,223 @@
 │   │   │   └── upload
 │   │   │       ├── default.jpg
 │   │   │       ├── family
-│   │   │       │   ├── 41644d01.jpg
-│   │   │       │   ├── 7c20da93.jpg
-│   │   │       │   ├── 8eaea51b.jpg
-│   │   │       │   ├── 8eff9b4f.jpg
-│   │   │       │   ├── b5745948.jpg
-│   │   │       │   ├── bb39ae34.jpg
-│   │   │       │   ├── ed3d602d.jpg
-│   │   │       │   ├── fb063e23.jpg
-│   │   │       │   └── fc9712b6.jpg
+│   │   │       │   ├── 0816fe27.jpg
+│   │   │       │   ├── 1821fe52.jpg
+│   │   │       │   ├── 1e71afbf.jpg
+│   │   │       │   ├── 266673b5.jpg
+│   │   │       │   ├── 2e3f1bb6.jpg
+│   │   │       │   ├── 3ec5522d.jpg
+│   │   │       │   ├── 40f2e31a.jpg
+│   │   │       │   ├── 46fef86a.jpg
+│   │   │       │   ├── 59228f8f.jpg
+│   │   │       │   ├── 85b578cb.jpg
+│   │   │       │   ├── 9d8e8dd1.jpg
+│   │   │       │   ├── a1bd3d61.jpg
+│   │   │       │   ├── a70ec910.jpg
+│   │   │       │   ├── aa2ee31b.jpg
+│   │   │       │   ├── ac11e04f.jpg
+│   │   │       │   ├── b468e51c.jpg
+│   │   │       │   ├── bcaa348c.jpg
+│   │   │       │   ├── bd9821d9.jpg
+│   │   │       │   ├── c61cbb79.jpg
+│   │   │       │   ├── c9077d82.jpg
+│   │   │       │   └── f67a5d3b.jpg
 │   │   │       └── person
-│   │   │           ├── 41644d01
+│   │   │           ├── 0816fe27
 │   │   │           │   ├── 0.jpg
 │   │   │           │   ├── 1.jpg
-│   │   │           │   ├── 2.jpg
-│   │   │           │   └── 3.jpg
-│   │   │           ├── 7c20da93
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       └── 1.jpg
+│   │   │           ├── 1821fe52
 │   │   │           │   ├── 0.jpg
 │   │   │           │   ├── 1.jpg
 │   │   │           │   ├── 2.jpg
 │   │   │           │   ├── 3.jpg
-│   │   │           │   └── 4.jpg
-│   │   │           ├── 8eaea51b
-│   │   │           ├── 8eff9b4f
-│   │   │           ├── b5745948
-│   │   │           │   └── 0.jpg
-│   │   │           ├── bb39ae34
-│   │   │           │   ├── 0.jpg
-│   │   │           │   └── 1.jpg
-│   │   │           ├── ed3d602d
-│   │   │           ├── fb063e23
+│   │   │           │   ├── 4.jpg
+│   │   │           │   ├── 5.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       ├── 4.jpg
+│   │   │           │       └── 5.jpg
+│   │   │           ├── 1e71afbf
 │   │   │           │   ├── 0.jpg
 │   │   │           │   ├── 1.jpg
-│   │   │           │   └── 2.jpg
-│   │   │           └── fc9712b6
-│   │   │               └── 0.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       └── 3.jpg
+│   │   │           ├── 266673b5
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       └── 1.jpg
+│   │   │           ├── 2e3f1bb6
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   └── small
+│   │   │           │       └── 0.jpg
+│   │   │           ├── 3ec5522d
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       └── 3.jpg
+│   │   │           ├── 40f2e31a
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       └── 1.jpg
+│   │   │           ├── 46fef86a
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   ├── 4.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       └── 4.jpg
+│   │   │           ├── 59228f8f
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       └── 3.jpg
+│   │   │           ├── 85b578cb
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       └── 3.jpg
+│   │   │           ├── 9d8e8dd1
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       └── 2.jpg
+│   │   │           ├── a1bd3d61
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       └── 2.jpg
+│   │   │           ├── a70ec910
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       └── 1.jpg
+│   │   │           ├── aa2ee31b
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       └── 4.jpg
+│   │   │           ├── ac11e04f
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       └── 2.jpg
+│   │   │           ├── b468e51c
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       └── 2.jpg
+│   │   │           ├── bcaa348c
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   ├── 4.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       ├── 4.jpg
+│   │   │           │       ├── 5.jpg
+│   │   │           │       ├── 6.jpg
+│   │   │           │       └── 7.jpg
+│   │   │           ├── bd9821d9
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       ├── 4.jpg
+│   │   │           │       └── 5.jpg
+│   │   │           ├── c61cbb79
+│   │   │           │   ├── 0.jpg
+│   │   │           │   ├── 1.jpg
+│   │   │           │   ├── 2.jpg
+│   │   │           │   ├── 3.jpg
+│   │   │           │   ├── 4.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       └── 3.jpg
+│   │   │           ├── c9077d82
+│   │   │           │   ├── 0.jpg
+│   │   │           │   └── small
+│   │   │           │       ├── 0.jpg
+│   │   │           │       ├── 1.jpg
+│   │   │           │       ├── 2.jpg
+│   │   │           │       ├── 3.jpg
+│   │   │           │       └── 4.jpg
+│   │   │           ├── default
+│   │   │           │   └── small
+│   │   │           └── f67a5d3b
+│   │   │               ├── 0.jpg
+│   │   │               ├── 1.jpg
+│   │   │               ├── 2.jpg
+│   │   │               └── small
+│   │   │                   ├── 0.jpg
+│   │   │                   ├── 1.jpg
+│   │   │                   └── 2.jpg
 │   │   └── templates
+│   │       ├── ageconfirm.html
 │   │       ├── base.html
 │   │       ├── faceconfirm.html
-│   │       └── index.html
+│   │       ├── index.html
+│   │       └── result.html
 │   ├── res
 │   │   ├── data
 │   │   │   ├── haarcascades
@@ -159,38 +897,47 @@
 │   │   │   │   ├── lbpcascade_profileface.xml
 │   │   │   │   └── lbpcascade_silverware.xml
 │   │   │   └── mat
-│   │   │       ├── ChildEigenVector.xml
-│   │   │       ├── YoungParentEigenVector1.xml
-│   │   │       └── YoungParentEigenVector.xml
+│   │   │       ├── ChildEigenVectors.xml
+│   │   │       ├── ChildFeatures.xml
+│   │   │       ├── OldParentEigenVectors.xml
+│   │   │       ├── OldParentFeatures.xml
+│   │   │       ├── YoungParentEigenVectors.xml
+│   │   │       └── YoungParentFeatures.xml
 │   │   ├── img
-│   │   │   ├── eye0.jpg
-│   │   │   ├── family0.jpg
-│   │   │   ├── family1.jpg
-│   │   │   ├── family2.jpg
-│   │   │   ├── family3.jpg
-│   │   │   ├── family4.jpg
-│   │   │   ├── family5.jpg
-│   │   │   ├── family6.jpg
-│   │   │   ├── family7.jpg
-│   │   │   ├── family8.jpg
-│   │   │   ├── kin0.jpg
-│   │   │   ├── kin1.jpg
-│   │   │   ├── kin2.jpg
-│   │   │   ├── kin3.jpg
-│   │   │   ├── kin4.jpg
+│   │   │   ├── family
+│   │   │   │   ├── Age-Synthesis-and-Estimation-via-Faces:A-Survey.pdf
+│   │   │   │   ├── A-Study-on-Automatic-Age-Estimation-using-a-Large-Database.pdf
+│   │   │   │   ├── family0.jpg
+│   │   │   │   ├── family10.jpg
+│   │   │   │   ├── family11.jpg
+│   │   │   │   ├── family12.jpg
+│   │   │   │   ├── family13.jpg
+│   │   │   │   ├── family14.jpg
+│   │   │   │   ├── family15.jpg
+│   │   │   │   ├── family1.jpg
+│   │   │   │   ├── family2.jpg
+│   │   │   │   ├── family3.jpg
+│   │   │   │   ├── family4.jpg
+│   │   │   │   ├── family5.jpg
+│   │   │   │   ├── family6.jpg
+│   │   │   │   ├── family7.jpg
+│   │   │   │   ├── family8.jpg
+│   │   │   │   ├── family9.jpg
+│   │   │   │   ├── family_special.jpg
+│   │   │   │   ├── Human-Age-Estimation-Using-Bio-inspired-Features.pdf
+│   │   │   │   └── Is-Gender-Recognition-Affected-by-Age.pdf
 │   │   │   ├── KinFace_V2
 │   │   │   │   ├── 01_part
 │   │   │   │   ├── 02_part
 │   │   │   │   └── 03_part
-│   │   │   ├── leader0.jpg
-│   │   │   ├── leader1.jpg
-│   │   │   ├── leader2.jpg
-│   │   │   ├── leader3.jpg
-│   │   │   ├── lena0.jpg
-│   │   │   ├── lena1.jpg
 │   │   │   ├── lena.jpg
-│   │   │   ├── me.jpg
-│   │   │   └── star0.jpg
+│   │   │   └── non-family
+│   │   │       ├── 0.jpg
+│   │   │       ├── 1.jpg
+│   │   │       ├── 2.jpg
+│   │   │       ├── 4.jpg
+│   │   │       ├── 5.jpg
+│   │   │       └── 6.jpg
 │   │   ├── sql
 │   │   │   └── schema.sql
 │   │   ├── template
@@ -208,6 +955,7 @@
 │   │   │   └── Makefile
 │   │   ├── ml
 │   │   │   ├── compile.txt
+│   │   │   ├── gen_training_data.cpp
 │   │   │   ├── Makefile
 │   │   │   ├── ml_data.cpp
 │   │   │   └── ml_knn.cpp
@@ -234,6 +982,13 @@
 │   │   │   ├── image-reader-test.cpp
 │   │   │   ├── Makefile
 │   │   │   └── test
+│   │   ├── knn-test
+│   │   │   ├── knn-test
+│   │   │   ├── knn-test.cpp
+│   │   │   ├── knn-test.o
+│   │   │   ├── Makefile
+│   │   │   ├── newtwo
+│   │   │   └── two.txt
 │   │   ├── Makefile
 │   │   ├── opencv-test
 │   │   │   ├── compile.txt
@@ -245,4 +1000,4 @@
 ├── README.md
 └── treegen.sh
 
-61 directories, 184 files
+103 directories, 897 files

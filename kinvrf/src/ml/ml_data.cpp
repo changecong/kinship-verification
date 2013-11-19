@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Fri Nov  1 13:27:28 2013
- * Modified at:   Thu Nov 14 23:07:51 2013
+ * Modified at:   Sun Nov 17 14:45:14 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -23,7 +23,8 @@
 
 #include "include/gabor_filter.h"  // class GaborFilter
 
-#include <cstring>
+#include <cstring>  // string
+#include <iostream>
 
 using namespace kinvrf_res;
 using namespace kinvrf_scvt;
@@ -85,26 +86,60 @@ namespace kinvrf_ml {
            (image_reader_one->image_height() != image_reader_two->image_height())) {
             // TODO            
         }
-
-        // diff of two mat
-        Mat diff_one_two = image_reader_one->image_mat() - image_reader_two->image_mat();
-        Mat diff_two_one = image_reader_two->image_mat() - image_reader_one->image_mat();
-
-        // gray
-        cvtColor(diff_one_two, diff_one_two, CV_BGR2GRAY);
-        cvtColor(diff_two_one, diff_two_one, CV_BGR2GRAY);
-
-        // equalize histogram
-        equalizeHist(diff_one_two, diff_one_two); 
-        equalizeHist(diff_two_one, diff_two_one); 
         
+        // Gabor Filter
+        uchar* row_data_one = NULL;
+        uchar* row_data_two = NULL;
+        size_t row_length_one;
+        size_t row_length_two;
 
-        // TODO
-        // do some process
-        //
+        ///////////// Gabor Filter ///////////////
+        // scale : 0, 1, 2
+        // orientation : 0, 1, 2, 3, 4, 5, 6, 7
+        //////////////////////////////////////////
+            
+        row_data_one = image_pre_process(8, 3, image_reader_one, row_length_one); 
+        row_data_two = image_pre_process(8, 3, image_reader_two, row_length_two);
 
-        test_data_one_ = diff_one_two.reshape(0, 1);
-        test_data_two_ = diff_two_one.reshape(0, 1);
+        if (row_length_one != row_length_two) {
+            // TODO ERROR
+        }
+
+        // put into mats
+        Mat gabor_feature_one = Mat(1, row_length_one, CV_8UC1, row_data_one);
+        Mat gabor_feature_two = Mat(1, row_length_two, CV_8UC1, row_data_two);
+        
+        gabor_feature_one.convertTo(gabor_feature_one, CV_32FC1);
+        gabor_feature_two.convertTo(gabor_feature_two, CV_32FC1);
+
+        // Pca
+        // feature matrix * eigen_vector generate from the training data.
+        string younger_filename = string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TESTDATAYOUNGEREIGENVECTORS);
+        string elder_filename = string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TESTDATAELDEREIGENVECTORS);
+
+        string younger_matname = string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TESTDATAYOUNGERMATNAME);
+        string elder_matname = string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TESTDATAELDERMATNAME);
+
+        Mat younger_eigen_vectors = read_mat(younger_filename,
+                                             younger_matname);
+        Mat elder_eigen_vectors = read_mat(elder_filename,
+                                           elder_matname);
+
+        // cout << younger_eigen_vectors.type() << endl;
+        // cout << gabor_feature_one.type() << endl;
+
+        // use back project to get the low dimentional matrix
+        Mat gabor_feature_one_low = gabor_feature_one * younger_eigen_vectors.t();
+        Mat gabor_feature_two_low = gabor_feature_two * elder_eigen_vectors.t();
+
+        test_data_one_ = gabor_feature_one_low - gabor_feature_two_low;
+        // cout << test_data_one_ << endl;
+        test_data_two_ = gabor_feature_two_low - gabor_feature_one_low;
+        // cout << test_data_two_ << endl;
     }
 
     ////////////////////
@@ -157,16 +192,61 @@ namespace kinvrf_ml {
         }
         case 2: {
             vector<DataRes*> raw_data;
-            for(vector<string>::const_iterator path = paths_.begin();
-                path != paths_.end(); path++) {
 
-                string temp = *path;
-
-                // get data from data resource
-                DataRes* data_resource = new DataRes(temp);
-                raw_data.push_back(data_resource);
-            }
+            DATAFORMAT data_format = get_data_format();
             
+            switch(data_format) {
+                
+            case XML_DATA: {
+
+                // get file names
+                vector<string> filenames;
+                vector<string> matnames;
+                filenames.push_back(get_younger_xml());
+                filenames.push_back(get_elder_xml());
+                matnames.push_back(get_younger_mat_name());
+                matnames.push_back(get_elder_mat_name());
+                
+                int i = 0;
+
+                for(vector<string>::const_iterator file = filenames.begin(); 
+                    file != filenames.end();
+                    file++, i++ ) {
+                
+                    string filename = *file;
+                    cout << filename << endl;
+                    string matname = matnames[i];
+
+                    // get data from data resource xml files
+                    DataRes* data_resource = new DataRes(filename,
+                                                         matname,
+                                                         KINVRF_DATA_FROM_EXTERNAL_XML);
+
+                    raw_data.push_back(data_resource);
+                }
+                
+                break;
+            }
+            case IMAGE_DATA: {
+                
+                for(vector<string>::const_iterator path = paths_.begin();
+                    path != paths_.end(); path++) {
+                    
+                    string temp = *path;
+                    
+                    // get data from data resource
+                    DataRes* data_resource = new DataRes(temp);
+                    raw_data.push_back(data_resource);
+                }
+                
+                break;                    
+            }
+            default:
+                
+                    break;
+                    
+            }
+
             Mat data_one_pos = raw_data[0]->data_mat();
             Mat data_two = raw_data[1]->data_mat();
             // generate positive data
@@ -179,12 +259,40 @@ namespace kinvrf_ml {
             train_data_neg_ = data_one_neg - data_two;
             
             break;
+            
+            
         }
-
+            
         default:
             // TODO WARNING
             break;
         }        
+    }
+
+    TrainData::DATAFORMAT TrainData::get_data_format() {
+        
+        return (DATAFORMAT)int_setting(
+            KINVRF_XML_RESOURCE_SETTING_TRAININGDATARESOURCETYPE);
+    }
+
+    string TrainData::get_younger_xml() {
+        return string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TRAININGDATAYOUNGERFEATURES);
+    }
+
+    string TrainData::get_elder_xml() {
+        return string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TRAININGDATAELDERFEATURES);
+    }
+
+    string TrainData::get_younger_mat_name() {
+        return string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TRAININGDATAYOUNGERMATNAME);
+    }
+
+    string TrainData::get_elder_mat_name() {
+        return string_setting(
+            KINVRF_XML_RESOURCE_SETTING_TRAININGDATAELDERMATNAME);
     }
 
     vector<string> TrainData::get_paths_from_setting() {
@@ -223,8 +331,8 @@ namespace kinvrf_ml {
         image_name_suffix_(""),
         image_type_suffix_("") {
         
-        image_data_path();
-        if("" != image_data_path_) {
+        data_path();
+        if("" != data_path_) {
 
             get_data(get_data_method());
         }
@@ -235,7 +343,7 @@ namespace kinvrf_ml {
     DataRes::DataRes(const string& s) : 
         data_res_(KINVRF_DATA_FROM_INTERNAL_SETTING),
         image_number_(0),
-        image_data_path_(s),
+        data_path_(s),
         image_name_prefix_(""),
         image_name_suffix_(""),
         image_type_suffix_("") {
@@ -248,7 +356,7 @@ namespace kinvrf_ml {
     DataRes::DataRes(DATARES data_res, const string& s) :
         data_res_(data_res),
         image_number_(0),
-        image_data_path_(s),
+        data_path_(s),
         image_name_prefix_(""),
         image_name_suffix_(""),
         image_type_suffix_("") {
@@ -256,12 +364,27 @@ namespace kinvrf_ml {
         get_data(data_res_);
     }
 
+    DataRes::DataRes(const string& filename,
+            const string& matname,
+            DATARES data_res) :
+        data_res_(data_res),
+        filename_(filename),
+        matname_(matname) {
+        
+        if(data_res == KINVRF_DATA_FROM_KINFACE_V2_IMAGE ||
+           data_res == KINVRF_DATA_FROM_EXTERNAL_IMAGE) {
+            // TODO ERROR
+        }
+
+        get_data(data_res_);
+    }
+
     // distructor
     DataRes::~DataRes(){}
 
     // set image_dat_path_
-    void DataRes::image_data_path(const string& s) {
-        image_data_path_ = s;
+    void DataRes::data_path(const string& s) {
+        data_path_ = s;
     }
 
     // get data_mat_
@@ -325,16 +448,19 @@ namespace kinvrf_ml {
     void DataRes::get_data(DATARES data_res) {
         
         switch(data_res) {
-        case KINVRF_DATA_FROM_KINSHIP_V2_IMAGE :
+            
+        case KINVRF_DATA_FROM_KINFACE_V2_IMAGE :
 
             get_data_from_image();
-            
+            // get_data_from_kinface_image()
+
             break;
 
-        case KINVRF_DATA_FROM_KINSHIP_V2_TEXT :
+        case KINVRF_DATA_FROM_KINFACE_V2_XML :
 
-            // get_data_from_text();
-            // read from text files
+            get_data_from_xml();
+            // get_data_from_kinface_xml();
+
             break;
 
         case KINVRF_DATA_FROM_EXTERNAL_IMAGE :
@@ -343,9 +469,10 @@ namespace kinvrf_ml {
             // read from external images
             break;
 
-        case KINVRF_DATA_FROM_EXTERNAL_TEXT :
+        case KINVRF_DATA_FROM_EXTERNAL_XML:
             
-            // read from external text
+            get_data_from_xml();
+   
             break;
 
         default :
@@ -370,7 +497,7 @@ namespace kinvrf_ml {
         } else {
 
             // cast to DATARES
-            return KINVRF_DATA_FROM_KINSHIP_V2_IMAGE;
+            return KINVRF_DATA_FROM_KINFACE_V2_IMAGE;
         }
     }
 
@@ -397,7 +524,7 @@ namespace kinvrf_ml {
             // 3.2 add together
             // "../../res/img/child/child-0-face.bmp"
             // "../../res/img/child/child-1-face.bmp"
-            image_name = image_data_path_ + image_name_prefix_
+            image_name = data_path_ + image_name_prefix_
                 + number_to_string(image_iter)
                 + image_name_suffix_ + image_type_suffix_;
 
@@ -473,8 +600,8 @@ namespace kinvrf_ml {
     }
 
     void DataRes::get_data_from_xml() {
-
-        // data_mat_ = read_mat(filename, matname);
+                
+        data_mat_ = read_mat(filename_, matname_);
     }
 
     void DataRes::image_number() {
@@ -496,8 +623,8 @@ namespace kinvrf_ml {
         }
     }
 
-    void DataRes::image_data_path() {
-        image_data_path_ = string_setting(KINVRF_XML_RESOURCE_SETTING_IMAGEDATAPATH);
+    void DataRes::data_path() {
+        data_path_ = string_setting(KINVRF_XML_RESOURCE_SETTING_IMAGEDATAPATH);
     }
 
     void DataRes::image_name_prefix(){
@@ -573,7 +700,7 @@ namespace kinvrf_ml {
         int small_width = cvRound(src.cols/down_sample);
         int small_height = cvRound(src.rows/down_sample);
         // resize the image into 1/6
-        Mat small(small_width, small_height, CV_8UC1);
+        Mat small(small_width, small_height, CV_32FC1);
         length = orientation * scale * small_width * small_height;
 
         uchar* gabor_feature = (uchar*)malloc(sizeof(uchar)*length);
@@ -604,7 +731,7 @@ namespace kinvrf_ml {
                        // INTER_LANCZOS4
                     );
                 
-                equalizeHist(small, small); 
+                // equalizeHist(small, small); 
                 
                 // get data
                 uchar* data = small.data;

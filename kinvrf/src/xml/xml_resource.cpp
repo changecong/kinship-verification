@@ -4,7 +4,7 @@
  * Version:       
  * Author:        Zhicong Chen <zhicong.chen@changecong.com>
  * Created at:    Thu Oct 31 12:09:05 2013
- * Modified at:   Wed Nov 13 14:21:12 2013
+ * Modified at:   Sun Nov 17 17:57:29 2013
  * Modified by:   Zhicong Chen <zhicong.chen@changecong.com>
  * Status:        Experimental, do not distribute.
  * Description:   
@@ -19,10 +19,10 @@
 
 namespace kinvrf_xml {
 
-    //const string KINVRF_XML_RESOURCE_STRING_XML = "../res/xml/string.xml";
-    const string KINVRF_XML_RESOURCE_STRING_XML = "../../res/xml/string.xml";
-    //const string KINVRF_XML_RESOURCE_SETTINGS_XML = "../res/xml/settings.xml";
-    const string KINVRF_XML_RESOURCE_SETTINGS_XML = "../../res/xml/settings.xml";
+    const string KINVRF_XML_RESOURCE_STRING_XML = "../res/xml/string.xml";
+    // const string KINVRF_XML_RESOURCE_STRING_XML = "../../res/xml/string.xml";
+    const string KINVRF_XML_RESOURCE_SETTINGS_XML = "../res/xml/settings.xml";
+    // const string KINVRF_XML_RESOURCE_SETTINGS_XML = "../../res/xml/settings.xml";
 
     XMLRes* XML_res() {
         return new XMLRes();
