@@ -3,7 +3,7 @@ Kinship Verification
 
 Author: Zhicong Chen (Northeastern University, US)
 
-This is my master's project.
+This was my master's project.
 
 ### Development Environment
 + Programming: C++ (for algorithm implementation and calculation), Python (for websit back-end), javascript (for website front-end)
